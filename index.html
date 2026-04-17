@@ -32,10 +32,14 @@ nav{
 }
 .nav-logo{
   font-family:'Bangers',cursive;
-  font-size:30px;letter-spacing:3px;
-  color:var(--green);
-  text-shadow:0 0 20px rgba(0,255,148,0.5);
+  font-size:28px;letter-spacing:3px;
+  text-transform:uppercase;
+  line-height:1;
+  text-decoration:none;
 }
+.nav-logo .nl-dollar{color:var(--green);text-shadow:0 0 16px rgba(0,255,148,0.6)}
+.nav-logo .nl-grok{color:#fff}
+.nav-logo .nl-br{color:var(--purple);text-shadow:0 0 16px rgba(176,38,255,0.6)}
 .nav-menu{display:flex;gap:36px;list-style:none;align-items:center}
 .nav-menu a{
   color:rgba(255,255,255,0.6);text-decoration:none;
@@ -61,8 +65,27 @@ nav{
   position:relative;overflow:hidden;
   padding-top:72px;
 }
+.hero-candles{
+  position:absolute;
+  z-index:1;
+  width:115%;height:115%;
+  top:-7.5%;left:-7.5%;
+  object-fit:cover;object-position:center center;
+  opacity:0.18;
+  mix-blend-mode:screen;
+  pointer-events:none;
+  animation:candles-drift 18s ease-in-out infinite;
+  transform-origin:center center;
+}
+@keyframes candles-drift{
+  0%   {transform:translate(0,0) scale(1)}
+  25%  {transform:translate(2%,1.5%) scale(1.03)}
+  50%  {transform:translate(-1.5%,2.5%) scale(1.05)}
+  75%  {transform:translate(1.5%,-1%) scale(1.03)}
+  100% {transform:translate(0,0) scale(1)}
+}
 .hero-bg{
-  position:absolute;inset:0;
+  position:absolute;inset:0;z-index:0;
   background:
     radial-gradient(ellipse 55% 70% at 65% 50%, rgba(0,80,30,0.22) 0%, transparent 65%),
     radial-gradient(ellipse 45% 50% at 20% 60%, rgba(0,255,148,0.07) 0%, transparent 65%),
@@ -98,6 +121,7 @@ nav{
   line-height:.95;letter-spacing:4px;
   text-transform:uppercase;
   margin-bottom:12px;
+  text-align:left;
 }
 .hero-h1 .dollar{color:var(--green);text-shadow:0 0 40px rgba(0,255,148,0.6),0 0 80px rgba(0,255,148,0.3)}
 .hero-h1 .grok{color:#fff}
@@ -194,8 +218,52 @@ nav{
   border:1px solid rgba(255,255,255,0.1);
   border-radius:100px;padding:8px 16px;
   font-size:13px;font-weight:600;color:rgba(255,255,255,0.7);
+  cursor:pointer;
+  transition:transform .2s ease,box-shadow .2s ease,background .2s ease,border-color .2s ease;
+  position:relative;
+  user-select:none;
 }
-.pill.green{border-color:rgba(0,255,148,0.3);color:var(--green);background:rgba(0,255,148,0.06)}
+.pill:hover{
+  transform:translateY(-3px) scale(1.06);
+  background:rgba(255,255,255,0.12);
+  border-color:rgba(255,255,255,0.35);
+  color:#fff;
+  box-shadow:0 6px 24px rgba(255,255,255,0.1);
+}
+.pill:active{transform:scale(0.96)}
+.pill::after{
+  content:attr(data-tip);
+  position:absolute;
+  bottom:calc(100% + 10px);
+  left:50%;transform:translateX(-50%) translateY(4px);
+  background:#0d1f14;
+  border:1px solid rgba(0,255,148,0.25);
+  color:rgba(255,255,255,0.85);
+  font-size:11px;font-weight:500;
+  white-space:nowrap;
+  padding:6px 12px;border-radius:8px;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity .2s ease,transform .2s ease;
+  z-index:100;
+}
+.pill:hover::after{opacity:1;transform:translateX(-50%) translateY(0)}
+.pill.green{
+  border-color:rgba(0,255,148,0.35);
+  color:var(--green);
+  background:rgba(0,255,148,0.06);
+  animation:pill-pulse 2.8s ease-in-out infinite;
+}
+.pill.green:hover{
+  background:rgba(0,255,148,0.18);
+  border-color:rgba(0,255,148,0.7);
+  box-shadow:0 6px 28px rgba(0,255,148,0.3);
+  animation:none;
+}
+@keyframes pill-pulse{
+  0%,100%{box-shadow:0 0 0 0 rgba(0,255,148,0.0)}
+  50%{box-shadow:0 0 0 6px rgba(0,255,148,0.12)}
+}
 /* MASCOT */
 .hero-right{
   position:absolute;right:-20px;top:50%;
@@ -321,7 +389,30 @@ section{padding:100px 60px}
   border-top:1px solid rgba(255,255,255,0.06);
   border-bottom:1px solid rgba(255,255,255,0.06);
   margin-bottom:56px;
+  position:relative;overflow:hidden;
 }
+.tok-billboard::before,.tok-billboard::after{
+  content:'';
+  position:absolute;top:0;bottom:0;
+  width:180px;z-index:2;
+  pointer-events:none;
+}
+.tok-billboard::before{
+  left:0;
+  background:linear-gradient(to right, var(--card) 0%, transparent 100%);
+}
+.tok-billboard::after{
+  right:0;
+  background:linear-gradient(to left, var(--card) 0%, transparent 100%);
+}
+.tok-billboard .tok-bg-img{
+  position:absolute;inset:0;z-index:0;
+  width:100%;height:100%;
+  object-fit:cover;object-position:center center;
+  opacity:0.18;
+  pointer-events:none;
+}
+.tok-stat-item{position:relative;z-index:1}
 .tok-stat-item{
   flex:1;text-align:center;padding:44px 20px;
   position:relative;transition:background .3s;
@@ -471,32 +562,193 @@ footer{
 /* ─── HAMBURGER ─── */
 .hamburger{
   display:none;flex-direction:column;justify-content:center;gap:5px;
-  background:none;border:none;cursor:pointer;padding:8px;z-index:300;
+  background:none;border:none;cursor:pointer;padding:8px;z-index:400;
+  position:relative;
 }
 .hamburger span{
   display:block;width:24px;height:2px;background:var(--white);
-  border-radius:2px;transition:all .3s ease;transform-origin:center;
+  border-radius:2px;transition:all .3s cubic-bezier(.77,0,.18,1);transform-origin:center;
 }
-.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);background:var(--green)}
 .hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
-.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);background:var(--green)}
+
+/* ═══ MOBILE MENU — PREMIUM ═══ */
 .nav-mobile{
-  display:none;position:fixed;inset:0;top:72px;z-index:250;
-  background:rgba(3,3,8,0.98);backdrop-filter:blur(20px);
-  flex-direction:column;align-items:center;justify-content:center;gap:32px;
+  display:none;
+  position:fixed;inset:0;z-index:350;
+  flex-direction:column;
+  overflow:hidden;
 }
-.nav-mobile.open{display:flex}
-.nav-mobile a{
-  color:rgba(255,255,255,0.8);text-decoration:none;
-  font-size:22px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
-  transition:color .2s;
+.nav-mobile.open{display:flex;animation:nm-slide-in .42s cubic-bezier(.16,1,.3,1) forwards}
+@keyframes nm-slide-in{
+  from{transform:translateX(100%);opacity:0}
+  to{transform:translateX(0);opacity:1}
 }
-.nav-mobile a:hover{color:var(--green)}
-.nav-mobile .nav-buy-mobile{
+@keyframes nm-slide-out{
+  from{transform:translateX(0);opacity:1}
+  to{transform:translateX(100%);opacity:0}
+}
+
+/* fundo */
+.nm-bg{
+  position:absolute;inset:0;z-index:0;
+  background:linear-gradient(160deg,#020c06 0%,#030912 55%,#08031a 100%);
+}
+.nm-blob1,.nm-blob2{
+  position:absolute;border-radius:50%;pointer-events:none;z-index:0;
+}
+.nm-blob1{
+  width:480px;height:480px;
+  top:-180px;right:-160px;
+  background:radial-gradient(circle,rgba(0,255,148,.13) 0%,transparent 70%);
+  animation:nm-blob 5s ease-in-out infinite;
+}
+.nm-blob2{
+  width:360px;height:360px;
+  bottom:-120px;left:-100px;
+  background:radial-gradient(circle,rgba(176,38,255,.1) 0%,transparent 70%);
+  animation:nm-blob 6s ease-in-out infinite reverse;
+}
+@keyframes nm-blob{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.18)}
+}
+.nm-grid{
+  position:absolute;inset:0;z-index:0;
+  background-image:radial-gradient(rgba(0,255,148,.04) 1px,transparent 1px);
+  background-size:28px 28px;
+}
+
+/* header */
+.nm-header{
+  position:relative;z-index:2;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:20px 24px 0;
+}
+.nm-logo{
+  font-family:'Bangers',cursive;
+  font-size:22px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--green);
+  text-shadow:0 0 20px rgba(0,255,148,.5);
+}
+.nm-live{
+  display:flex;align-items:center;gap:6px;
+  background:rgba(255,23,68,.08);
+  border:1px solid rgba(255,23,68,.3);
+  border-radius:100px;padding:4px 10px;
+  font-size:9px;font-weight:800;letter-spacing:2px;color:#ff4d6d;
+  text-transform:uppercase;
+}
+.nm-live-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:#ff1744;
+  box-shadow:0 0 8px #ff1744;
+  animation:live-blink 1.1s ease-in-out infinite;
+}
+
+/* links */
+.nm-nav{
+  position:relative;z-index:2;
+  display:flex;flex-direction:column;justify-content:flex-start;
+  padding:24px 24px 0;
+  gap:0;
+  flex:1;
+  overflow-y:auto;
+}
+.nm-link{
+  display:flex;align-items:center;gap:14px;
+  padding:16px 0;
+  border-bottom:1px solid rgba(255,255,255,.05);
+  text-decoration:none;
+  color:rgba(255,255,255,.75);
+  transition:color .2s,padding-left .2s;
+  opacity:0;
+  flex-shrink:0;
+}
+.nav-mobile.open .nm-link:nth-child(1){animation:nm-item .4s .18s cubic-bezier(.16,1,.3,1) forwards}
+.nav-mobile.open .nm-link:nth-child(2){animation:nm-item .4s .26s cubic-bezier(.16,1,.3,1) forwards}
+.nav-mobile.open .nm-link:nth-child(3){animation:nm-item .4s .34s cubic-bezier(.16,1,.3,1) forwards}
+.nav-mobile.open .nm-link:nth-child(4){animation:nm-item .4s .42s cubic-bezier(.16,1,.3,1) forwards}
+@keyframes nm-item{
+  from{opacity:0;transform:translateX(-24px)}
+  to{opacity:1;transform:translateX(0)}
+}
+.nm-link:hover{color:#fff;padding-left:6px}
+.nm-link:hover .nm-num{color:var(--green)}
+.nm-link:hover .nm-arr{opacity:1;transform:translateX(0)}
+.nm-num{
+  font-family:'Bangers',cursive;font-size:13px;letter-spacing:1px;
+  color:rgba(0,255,148,.35);min-width:22px;
+}
+.nm-text{
+  font-family:'Bangers',cursive;
+  font-size:32px;letter-spacing:3px;text-transform:uppercase;
+  line-height:1;flex:1;
+}
+.nm-arr{
+  font-size:18px;opacity:0;
+  transform:translateX(-8px);
+  transition:opacity .2s,transform .2s;
+  color:var(--green);
+}
+
+/* CTA */
+.nm-cta-wrap{
+  position:relative;z-index:2;
+  padding:20px 24px;
+  opacity:0;
+}
+.nav-mobile.open .nm-cta-wrap{animation:nm-item .4s .52s cubic-bezier(.16,1,.3,1) forwards}
+.nm-cta{
+  display:flex;align-items:center;justify-content:center;gap:10px;
   background:var(--green);color:#000 !important;
-  padding:14px 36px;border-radius:8px;font-weight:700 !important;
-  font-size:18px !important;margin-top:8px;
+  font-family:'Bangers',cursive;font-size:24px;letter-spacing:2px;
+  padding:18px 32px;border-radius:14px;
+  text-decoration:none;
+  box-shadow:0 6px 40px rgba(0,255,148,.4);
+  position:relative;overflow:hidden;
+  -webkit-tap-highlight-color:transparent;
 }
+.nm-cta::before{
+  content:'';position:absolute;top:0;left:-75%;width:50%;height:100%;
+  background:linear-gradient(120deg,transparent,rgba(255,255,255,.4),transparent);
+  animation:btn-shimmer 2.4s ease-in-out infinite;
+}
+
+/* stats */
+.nm-stats{
+  position:relative;z-index:2;
+  display:flex;justify-content:center;gap:10px;flex-wrap:wrap;
+  padding:0 24px 20px;
+  opacity:0;
+}
+.nav-mobile.open .nm-stats{animation:nm-item .4s .62s cubic-bezier(.16,1,.3,1) forwards}
+.nm-stat{
+  display:flex;align-items:center;gap:5px;
+  background:rgba(0,255,148,.06);
+  border:1px solid rgba(0,255,148,.15);
+  border-radius:100px;padding:5px 12px;
+  font-size:11px;font-weight:700;letter-spacing:.5px;
+  color:rgba(255,255,255,.55);
+}
+
+/* ticker bottom */
+.nm-ticker{
+  position:relative;z-index:2;
+  border-top:1px solid rgba(0,255,148,.08);
+  padding:10px 0;
+  overflow:hidden;
+  opacity:0;
+}
+.nav-mobile.open .nm-ticker{animation:nm-item .4s .7s cubic-bezier(.16,1,.3,1) forwards}
+.nm-ticker-track{
+  display:flex;gap:32px;width:max-content;
+  font-family:'Bangers',cursive;font-size:12px;letter-spacing:2px;
+  color:rgba(0,255,148,.3);
+  animation:ticker-scroll 12s linear infinite;
+}
+@keyframes ticker-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
 /* ─── RESPONSIVE ─── */
 @media(max-width:960px){
@@ -509,6 +761,7 @@ footer{
   .hero-right{position:absolute;right:auto;left:50%;top:50%;transform:translate(-50%,-50%);width:90%;opacity:0.18;z-index:1}
   .hero-actions{justify-content:center}
   .hero-pills{justify-content:center}
+  .hero-h1{text-align:left}
   .hero-desc{margin:0 auto 40px}
   .mascot-img{max-width:320px}
   .about-grid{grid-template-columns:1fr;gap:24px}
@@ -708,12 +961,12 @@ footer{
 @keyframes title-grok{
   0%,100%{color:#fff;text-shadow:0 0 0 transparent}
   35%{color:#a0e0ff;text-shadow:0 0 40px rgba(160,224,255,.6),0 0 80px rgba(160,224,255,.2)}
-  70%{color:#ffe8a0;text-shadow:0 0 30px rgba(255,232,160,.5)}
+  70%{color:#a8eb7b;text-shadow:0 0 30px rgba(255,232,160,.5)}
 }
 @keyframes title-br{
-  0%,100%{color:#B026FF;text-shadow:0 0 40px rgba(176,38,255,.8),0 0 80px rgba(176,38,255,.4)}
+  0%,100%{color:#16d650;text-shadow:0 0 40px rgba(16, 238, 134, 0.8),0 0 80px rgba(176,38,255,.4)}
   35%{color:#FF1744;text-shadow:0 0 40px rgba(255,23,68,.8),0 0 80px rgba(255,23,68,.4)}
-  70%{color:#ff66cc;text-shadow:0 0 40px rgba(255,102,204,.7),0 0 80px rgba(255,102,204,.3)}
+  70%{color:#06f006;text-shadow:0 0 40px rgba(243, 239, 20, 0.7),0 0 80px rgba(255,102,204,.3)}
 }
 
 .hero-h1 .dollar{
@@ -744,6 +997,7 @@ footer{
   transition:transform .4s ease;
 }
 /* hover controlado por JS para retorno suave */
+
 
 /* ═══ MODAL DE REGISTRO ═══ */
 .reg-overlay{position:fixed;inset:0;z-index:10000;background:rgba(0,0,0,.88);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;animation:reg-fade .25s ease}
@@ -1008,6 +1262,53 @@ footer{
   font-size:12px;color:rgba(255,255,255,.3);line-height:1.6;
 }
 .maint-urgency b{color:rgba(255,214,0,.8)}
+
+/* ── TIMER + LIVE ── */
+.maint-timer-wrap{
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(255,23,68,.07);
+  border:1px solid rgba(255,23,68,.25);
+  border-radius:12px;
+  padding:12px 16px;
+  margin-bottom:16px;
+}
+.maint-timer-label{
+  font-size:10px;font-weight:700;letter-spacing:2px;
+  text-transform:uppercase;color:rgba(255,100,100,.8);
+}
+.maint-timer-count{
+  font-family:'Bangers',cursive;
+  font-size:28px;letter-spacing:3px;
+  color:#ff4d6d;
+  text-shadow:0 0 16px rgba(255,23,68,.5);
+  transition:color .3s;
+}
+.maint-timer-count.urgent{
+  color:#ff1744;
+  animation:timer-blink .6s ease-in-out infinite;
+}
+@keyframes timer-blink{0%,100%{opacity:1}50%{opacity:.5}}
+
+.maint-live-bar{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  background:rgba(0,255,148,.05);
+  border:1px solid rgba(0,255,148,.12);
+  border-radius:10px;
+  padding:8px 14px;
+  margin-bottom:18px;
+  font-size:12px;color:rgba(255,255,255,.55);
+}
+.maint-live-dot{
+  width:7px;height:7px;border-radius:50%;
+  background:#00ff94;
+  box-shadow:0 0 8px #00ff94;
+  animation:live-blink 1.1s ease-in-out infinite;
+  flex-shrink:0;
+}
+.maint-live-num{
+  font-weight:800;color:#00ff94;
+  font-size:14px;
+}
 .maint-progress-wrap{margin-bottom:24px}
 .maint-progress-label{
   display:flex;justify-content:space-between;
@@ -1033,57 +1334,101 @@ footer{
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">$GrokBRcoin</div>
+  <div class="nav-logo"><span class="nl-dollar">$</span><span class="nl-grok">Grok</span><span class="nl-br">BRcoin</span></div>
   <ul class="nav-menu">
-    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#sobre" data-i18n="nav-sobre">Sobre</a></li>
     <li><a href="#tokenomics">Tokenomics</a></li>
-    <li><a href="#comprar">Como Comprar</a></li>
-    <li><a href="#galeria">Galeria</a></li>
-    <li><a href="#comunidade" class="nav-buy">🚀 Participar Agora</a></li>
+    <li><a href="#comprar" data-i18n="nav-comprar">Como Comprar</a></li>
+    <li><a href="#galeria" data-i18n="nav-galeria">Galeria</a></li>
+    <li><a href="#comunidade" class="nav-buy" data-i18n="nav-cta">🚀 Participar Agora</a></li>
   </ul>
   <button class="hamburger" id="hamburger" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
 </nav>
 <div class="nav-mobile" id="navMobile">
-  <a href="#sobre" onclick="closeMenu()">Sobre</a>
-  <a href="#tokenomics" onclick="closeMenu()">Tokenomics</a>
-  <a href="#comprar" onclick="closeMenu()">Como Comprar</a>
-  <a href="#galeria" onclick="closeMenu()">Galeria</a>
-  <a href="#comunidade" class="nav-buy-mobile" onclick="closeMenu()">🚀 Participar Agora</a>
+  <div class="nm-bg"></div>
+  <div class="nm-blob1"></div>
+  <div class="nm-blob2"></div>
+  <div class="nm-grid"></div>
+
+  <div class="nm-header">
+    <div class="nm-logo">$GrokBRcoin</div>
+    <div class="nm-live"><span class="nm-live-dot"></span>AO VIVO</div>
+  </div>
+
+  <nav class="nm-nav">
+    <a href="#sobre" class="nm-link" onclick="closeMenu()">
+      <span class="nm-num">01</span>
+      <span class="nm-text">Sobre</span>
+      <span class="nm-arr">→</span>
+    </a>
+    <a href="#tokenomics" class="nm-link" onclick="closeMenu()">
+      <span class="nm-num">02</span>
+      <span class="nm-text">Tokenomics</span>
+      <span class="nm-arr">→</span>
+    </a>
+    <a href="#comprar" class="nm-link" onclick="closeMenu()">
+      <span class="nm-num">03</span>
+      <span class="nm-text">Como Comprar</span>
+      <span class="nm-arr">→</span>
+    </a>
+    <a href="#galeria" class="nm-link" onclick="closeMenu()">
+      <span class="nm-num">04</span>
+      <span class="nm-text">Galeria</span>
+      <span class="nm-arr">→</span>
+    </a>
+  </nav>
+
+  <div class="nm-cta-wrap">
+    <a href="#comunidade" class="nm-cta" onclick="closeMenu()">🚀 Participar Agora</a>
+  </div>
+
+  <div class="nm-stats">
+    <span class="nm-stat">✅ Zero Tax</span>
+    <span class="nm-stat">🔥 LP Queimada</span>
+    <span class="nm-stat">⚡ Base Chain</span>
+    <span class="nm-stat">💎 1B Supply</span>
+  </div>
+
+  <div class="nm-ticker">
+    <div class="nm-ticker-track">
+      <span>🚀 $GROKBRCOIN</span><span>✦ ZERO TAX</span><span>✦ 1000X</span><span>✦ LP QUEIMADA</span><span>✦ É NÓS QUE TÁ</span><span>✦ BASE CHAIN</span><span>✦ CARALHO VAI</span>
+      <span>🚀 $GROKBRCOIN</span><span>✦ ZERO TAX</span><span>✦ 1000X</span><span>✦ LP QUEIMADA</span><span>✦ É NÓS QUE TÁ</span><span>✦ BASE CHAIN</span><span>✦ CARALHO VAI</span>
+    </div>
+  </div>
 </div>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-bg"></div>
+  <img class="hero-candles" src="GROKBR/GrokBrCoin imagens/ideogram-v3.0_..._irregular_glowing_green_and_red_candlestick_chart_with_vertical_dripping_neo-0-removebg-preview.png" alt="">
   <div class="hero-inner">
     <div class="hero-left">
       <div class="hero-tag"><span></span> Memecoin Brasileira · Base Chain</div>
-      <h1 class="hero-h1">
-        <span class="dollar">$</span><span class="grok">Grok</span><span class="br">BRcoin</span>
-      </h1>
-      <div class="hero-tagline">O Grok do Brasil, porra! 🇧🇷</div>
-      <p class="hero-desc">
-        IA com <strong>inteligência de rua</strong>. Sarcástico, direto e sem frescura.<br>
-        <strong>1000x ou nada.</strong> Caralho vai. 🚀
+
+      <div class="hero-tagline" data-i18n="hero-tagline">Brazil's Grok, no cap! 🇧🇷</div>
+      <p class="hero-desc" data-i18n="hero-desc">
+        AI with <strong>street smarts</strong>. Sarcastic, raw and no cap.<br>
+        <strong>1000x or nothing.</strong> Let's f*cking go. 🚀
       </p>
       <div class="hero-actions">
-        <a href="#" onclick="showMaint(event)" class="btn-green">
+        <a href="#" onclick="showMaint(event)" class="btn-green" data-i18n="hero-btn-buy">
           🚀 Comprar $GrokBRcoin
           <span class="btn-badge">Zero Tax</span>
         </a>
-        <a href="#sobre" class="btn-outline">Saber Mais</a>
+        <a href="#sobre" class="btn-outline" data-i18n="hero-btn-learn">Saber Mais</a>
         <div class="btn-trust">
-          <span>🔒 <b>Carteira segura</b></span>
-          <span>🔥 <b>LP queimada</b></span>
-          <span>⚡ <b>Base Chain</b></span>
+          <span data-i18n="trust-1">🔒 <b>Carteira segura</b></span>
+          <span data-i18n="trust-2">🔥 <b>LP queimada</b></span>
+          <span data-i18n="trust-3">⚡ <b>Base Chain</b></span>
         </div>
       </div>
       <div class="hero-pills">
-        <div class="pill green">✅ Zero Tax</div>
-        <div class="pill green">🔥 LP Queimada</div>
-        <div class="pill">⚡ Base Chain</div>
-        <div class="pill">💎 1 Bilhão Supply</div>
+        <div class="pill green" data-tip="Sem taxas — você fica com 100% do valor">✅ Zero Tax</div>
+        <div class="pill green" data-tip="LP destruída para sempre — ninguém puxa o tapete">🔥 LP Queimada</div>
+        <div class="pill" data-tip="Rede da Coinbase: rápido e barato como deve ser">⚡ Base Chain</div>
+        <div class="pill" data-tip="Supply fixo, imutável — inflação? Zero.">💎 1 Bilhão Supply</div>
       </div>
     </div>
     <div class="hero-right">
@@ -1100,14 +1445,14 @@ footer{
 <!-- TICKER -->
 <div class="ticker">
   <div class="ticker-track">
-    <span>🚀 $GROKBRcoin</span><span>✦ 1000X PUMP PORRA</span>
-    <span>✦ ZERO TAX</span><span>✦ LP QUEIMADA</span>
-    <span>✦ É NÓS QUE TÁ</span><span>✦ CARALHO VAI</span>
-    <span>✦ TO THE MOON PORRA</span><span>✦ GROK DO BRASIL</span>
-    <span>🚀 $GROKBRcoin</span><span>✦ 1000X PUMP PORRA</span>
-    <span>✦ ZERO TAX</span><span>✦ LP QUEIMADA</span>
-    <span>✦ É NÓS QUE TÁ</span><span>✦ CARALHO VAI</span>
-    <span>✦ TO THE MOON PORRA</span><span>✦ GROK DO BRASIL</span>
+    <span>🚀 $GROKBRcoin</span><span>✦ BUY BEFORE THE PUMP</span>
+    <span>✦ SUPPLY FIXO — NEVER DILUTED</span><span>✦ 0% TAX FOREVER</span>
+    <span>✦ BUILT ON BASE CHAIN</span><span>✦ LP BURNED — NO RUG</span>
+    <span>✦ EARLY = RICH</span><span>✦ 1000X OR NOTHING</span>
+    <span>🚀 $GROKBRcoin</span><span>✦ BUY BEFORE THE PUMP</span>
+    <span>✦ SUPPLY FIXO — NEVER DILUTED</span><span>✦ 0% TAX FOREVER</span>
+    <span>✦ BUILT ON BASE CHAIN</span><span>✦ LP BURNED — NO RUG</span>
+    <span>✦ EARLY = RICH</span><span>✦ 1000X OR NOTHING</span>
   </div>
 </div>
 
@@ -1123,39 +1468,39 @@ footer{
         <div class="speech-bubble" id="speechBubble"><span id="bubbleText">...</span></div>
       </div>
       <div>
-        <span class="section-label">// Sobre o Projeto</span>
-        <h2 class="section-h2">IA com alma<br><span class="g">brasileira</span><span class="p">.</span></h2>
-        <p class="section-lead">
+        <span class="section-label" data-i18n="about-label">// Sobre o Projeto</span>
+        <h2 class="section-h2" data-i18n="about-h2">IA com alma<br><span class="g">brasileira</span><span class="p">.</span></h2>
+        <p class="section-lead" data-i18n="about-lead">
           Juntamos a IA mais avançada do mundo com a malandragem brasileira.
-          Sem whitepaper de 80 páginas. Sem bullshit. Só meme, comunidade e pump sincero.
+          No 80-page whitepaper. No BS. Just memes, community and real pump energy.
         </p>
         <div class="about-features">
           <div class="feat feat--green">
             <div class="feat-icon">🤖</div>
             <div>
-              <div class="feat-title">IA com Inteligência de Rua</div>
-              <div class="feat-desc">O Grok da xAI caiu no caldeirão brasileiro. O resultado foi esse robô debochado que você vê.</div>
+              <div class="feat-title" data-i18n="feat1-title">IA com Inteligência de Rua</div>
+              <div class="feat-desc" data-i18n="feat1-desc">O Grok da xAI caiu no caldeirão brasileiro. O resultado foi esse robô debochado que você vê.</div>
             </div>
           </div>
           <div class="feat feat--red">
             <div class="feat-icon">🔥</div>
             <div>
-              <div class="feat-title">Zero Bullshit</div>
-              <div class="feat-desc">Sem whitepaper de 80 páginas, sem promessa vazia, sem dev sumindo. Só comunidade raiz.</div>
+              <div class="feat-title" data-i18n="feat2-title">Zero Bullshit</div>
+              <div class="feat-desc" data-i18n="feat2-desc">Sem whitepaper de 80 páginas, sem promessa vazia, sem dev sumindo. Só comunidade raiz.</div>
             </div>
           </div>
           <div class="feat feat--blue">
             <div class="feat-icon">💎</div>
             <div>
-              <div class="feat-title">Mão de Diamante</div>
-              <div class="feat-desc">Comunidade que não larga o osso. Enquanto o mercado chora, a gente segura e pump.</div>
+              <div class="feat-title" data-i18n="feat3-title">Mão de Diamante</div>
+              <div class="feat-desc" data-i18n="feat3-desc">Community that never folds. While the market bleeds, we HODL and pump harder.</div>
             </div>
           </div>
           <div class="feat feat--gold">
             <div class="feat-icon">🇧🇷</div>
             <div>
-              <div class="feat-title">100% Brasileiro</div>
-              <div class="feat-desc">A primeira memecoin que fala a língua do povo. Em português raiz, sem frescura.</div>
+              <div class="feat-title" data-i18n="feat4-title">100% Brasileiro</div>
+              <div class="feat-desc" data-i18n="feat4-desc">The first memecoin that speaks the people's language. Raw, unfiltered, no cap.</div>
             </div>
           </div>
         </div>
@@ -1164,17 +1509,18 @@ footer{
   </div>
 </section>
 
-<div class="ticker-sep"><div class="ts-track"><span>🤖 $GROKBRCoin</span><span>🚀 BASE CHAIN</span><span>🔥 LP QUEIMADA</span><span>💎 ZERO TAX</span><span>🇧🇷 É NÓS QUE TÁ</span><span>⚡ MOON PORRA</span><span>🐂 FORÇA TOTAL</span><span>🔒 HOLDER FIRM</span><span>🤖 $GROKBRCoin</span><span>🚀 BASE CHAIN</span><span>🔥 LP QUEIMADA</span><span>💎 ZERO TAX</span><span>🇧🇷 É NÓS QUE TÁ</span><span>⚡ MOON PORRA</span><span>🐂 FORÇA TOTAL</span><span>🔒 HOLDER FIRM</span></div></div>
+<div class="ticker-sep"><div class="ts-track"><span>⚡ EARLY = RICH</span><span>🔥 NEXT 1000X LOADING...</span><span>💎 0% TAX — 100% DO SEU DINHEIRO</span><span>🔒 LP QUEIMADA — NO RUG EVER</span><span>👥 +1.2K DEGENS & GROWING</span><span>🏦 BUILT ON BASE — COINBASE'S CHAIN</span><span>🚨 QUEM ESPERA, PERDE</span><span>🌎 A GALERA TÁ DENTRO — E VOCÊ?</span><span>⚡ EARLY = RICH</span><span>🔥 NEXT 1000X LOADING...</span><span>💎 0% TAX — 100% DO SEU DINHEIRO</span><span>🔒 LP QUEIMADA — NO RUG EVER</span><span>👥 +1.2K DEGENS & GROWING</span><span>🏦 BUILT ON BASE — COINBASE'S CHAIN</span><span>🚨 QUEM ESPERA, PERDE</span><span>🌎 A GALERA TÁ DENTRO — E VOCÊ?</span></div></div>
 
 <!-- TOKENOMICS -->
 <section class="tokenomics-section" id="tokenomics">
   <div class="section-inner">
     <div class="tok-header">
-      <span class="section-label">// Tokenomics</span>
-      <h2 class="section-h2">Simples.<br><span class="g">Transparente.</span> Sem papo.</h2>
-      <p class="section-lead" style="margin-top:16px;max-width:480px;margin-left:auto;margin-right:auto">Supply fixo de <strong style="color:var(--white)">1 bilhão</strong> para sempre. Enquanto outros projetos imprimem tokens e diluem você, o $GROKBRCoin não tem como.</p>
+      <span class="section-label" data-i18n="tok-label">// Tokenomics</span>
+      <h2 class="section-h2" data-i18n="tok-h2">Simples.<br><span class="g">Transparente.</span> Sem papo.</h2>
+      <p class="section-lead" style="margin-top:16px;max-width:480px;margin-left:auto;margin-right:auto" data-i18n="tok-desc">Supply fixo de <strong style="color:var(--white)">1 bilhão</strong> para sempre. Enquanto outros projetos imprimem tokens e diluem você, o $GROKBRCoin não tem como.</p>
     </div>
     <div class="tok-billboard">
+      <img class="tok-bg-img" src="GROKBR/GrokBrCoin imagens/lucid-origin_..._dynamic_candlestick_patterns_that_trigger_strong_FOMO_and_greed_emotions_bul-0.jpg" alt="">
       <div class="tok-stat-item">
         <span class="tok-big-num">1<span class="tok-suffix">B</span></span>
         <span class="tok-big-label">Supply Total</span>
@@ -1211,57 +1557,57 @@ footer{
   </div>
 </section>
 
-<div class="ticker-sep"><div class="ts-track"><span>🤖 $GROKBRCoin</span><span>🚀 BASE CHAIN</span><span>🔥 LP QUEIMADA</span><span>💎 ZERO TAX</span><span>🇧🇷 É NÓS QUE TÁ</span><span>⚡ MOON PORRA</span><span>🐂 FORÇA TOTAL</span><span>🔒 HOLDER FIRM</span><span>🤖 $GROKBRCoin</span><span>🚀 BASE CHAIN</span><span>🔥 LP QUEIMADA</span><span>💎 ZERO TAX</span><span>🇧🇷 É NÓS QUE TÁ</span><span>⚡ MOON PORRA</span><span>🐂 FORÇA TOTAL</span><span>🔒 HOLDER FIRM</span></div></div>
+<div class="ticker-sep"><div class="ts-track"><span>⚡ EARLY = RICH</span><span>🔥 NEXT 1000X LOADING...</span><span>💎 0% TAX — 100% DO SEU DINHEIRO</span><span>🔒 LP QUEIMADA — NO RUG EVER</span><span>👥 +1.2K DEGENS & GROWING</span><span>🏦 BUILT ON BASE — COINBASE'S CHAIN</span><span>🚨 QUEM ESPERA, PERDE</span><span>🌎 A GALERA TÁ DENTRO — E VOCÊ?</span><span>⚡ EARLY = RICH</span><span>🔥 NEXT 1000X LOADING...</span><span>💎 0% TAX — 100% DO SEU DINHEIRO</span><span>🔒 LP QUEIMADA — NO RUG EVER</span><span>👥 +1.2K DEGENS & GROWING</span><span>🏦 BUILT ON BASE — COINBASE'S CHAIN</span><span>🚨 QUEM ESPERA, PERDE</span><span>🌎 A GALERA TÁ DENTRO — E VOCÊ?</span></div></div>
 
 <!-- HOW TO BUY -->
 <section id="comprar">
   <div class="section-inner">
-    <span class="section-label">// Como Comprar</span>
-    <h2 class="section-h2">Fácil que nem<br><span class="g">respirar</span><span class="r">.</span></h2>
+    <span class="section-label" data-i18n="htb-label">// Como Comprar</span>
+    <h2 class="section-h2" data-i18n="htb-h2">Fácil que nem<br><span class="g">respirar</span><span class="r">.</span></h2>
     <div class="htb-grid">
       <div class="htb-card">
         <div class="htb-num-badge">01</div>
         <div class="htb-num">01</div>
         <span class="htb-icon">👛</span>
-        <div class="htb-title">Cria a Carteira</div>
-        <div class="htb-desc">Baixa a Coinbase Wallet ou MetaMask. Já tem? Pula pro próximo passo, irmão.</div>
+        <div class="htb-title" data-i18n="htb1-title">Cria a Carteira</div>
+        <div class="htb-desc" data-i18n="htb1-desc">Download Coinbase Wallet or MetaMask. Already got one? Skip ahead, fam.</div>
       </div>
       <div class="htb-card">
         <div class="htb-num-badge">02</div>
         <div class="htb-num">02</div>
         <span class="htb-icon">⚡</span>
-        <div class="htb-title">Coloca ETH na Base</div>
-        <div class="htb-desc">Compra ETH em qualquer exchange e manda pra rede Base. Sem ETH, sem $GROKBRCoin.</div>
+        <div class="htb-title" data-i18n="htb2-title">Coloca ETH na Base</div>
+        <div class="htb-desc" data-i18n="htb2-desc">Compra ETH em qualquer exchange e manda pra rede Base. Sem ETH, sem $GROKBRCoin.</div>
       </div>
       <div class="htb-card">
         <div class="htb-num-badge">03</div>
         <div class="htb-num">03</div>
         <span class="htb-icon">🔄</span>
-        <div class="htb-title">Vai na Uniswap</div>
-        <div class="htb-desc">Conecta a carteira na Uniswap v4 e cola o CA do $GROKBRCoin. Simples assim.</div>
+        <div class="htb-title" data-i18n="htb3-title">Vai na Uniswap</div>
+        <div class="htb-desc" data-i18n="htb3-desc">Conecta a carteira na Uniswap v4 e cola o CA do $GROKBRCoin. Simples assim.</div>
       </div>
       <div class="htb-card">
         <div class="htb-num-badge">04</div>
         <div class="htb-num">04</div>
         <span class="htb-icon">🚀</span>
-        <div class="htb-title">Compra e Segura</div>
-        <div class="htb-desc">Faz o swap, coloca na carteira e aguenta o pump. Mão de diamante, irmão. É nós.</div>
+        <div class="htb-title" data-i18n="htb4-title">Compra e Segura</div>
+        <div class="htb-desc" data-i18n="htb4-desc">Swap it, bag it and HODL the pump. Diamond hands, fam. LFG.</div>
       </div>
     </div>
     <div style="text-align:center;margin-top:48px">
-      <a href="#" onclick="showMaint(event)" class="btn-green" style="font-size:17px;padding:18px 48px">🚀 Comprar $GROKBRCoin Agora</a>
+      <a href="#" onclick="showMaint(event)" class="btn-green" style="font-size:17px;padding:18px 48px" data-i18n="htb-cta">🚀 Comprar $GROKBRCoin Agora</a>
     </div>
   </div>
 </section>
 
 <!-- GALLERY -->
-<div class="ticker-sep"><div class="ts-track"><span>🤖 $GROKBRCoin</span><span>🚀 BASE CHAIN</span><span>🔥 LP QUEIMADA</span><span>💎 ZERO TAX</span><span>🇧🇷 É NÓS QUE TÁ</span><span>⚡ MOON PORRA</span><span>🐂 FORÇA TOTAL</span><span>🔒 HOLDER FIRM</span><span>🤖 $GROKBRCoin</span><span>🚀 BASE CHAIN</span><span>🔥 LP QUEIMADA</span><span>💎 ZERO TAX</span><span>🇧🇷 É NÓS QUE TÁ</span><span>⚡ MOON PORRA</span><span>🐂 FORÇA TOTAL</span><span>🔒 HOLDER FIRM</span></div></div>
+<div class="ticker-sep"><div class="ts-track"><span>⚡ EARLY = RICH</span><span>🔥 NEXT 1000X LOADING...</span><span>💎 0% TAX — 100% DO SEU DINHEIRO</span><span>🔒 LP QUEIMADA — NO RUG EVER</span><span>👥 +1.2K DEGENS & GROWING</span><span>🏦 BUILT ON BASE — COINBASE'S CHAIN</span><span>🚨 QUEM ESPERA, PERDE</span><span>🌎 A GALERA TÁ DENTRO — E VOCÊ?</span><span>⚡ EARLY = RICH</span><span>🔥 NEXT 1000X LOADING...</span><span>💎 0% TAX — 100% DO SEU DINHEIRO</span><span>🔒 LP QUEIMADA — NO RUG EVER</span><span>👥 +1.2K DEGENS & GROWING</span><span>🏦 BUILT ON BASE — COINBASE'S CHAIN</span><span>🚨 QUEM ESPERA, PERDE</span><span>🌎 A GALERA TÁ DENTRO — E VOCÊ?</span></div></div>
 
 <section id="galeria" style="background:var(--card);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
   <div class="section-inner">
     <div class="meme-header">
       <span class="section-label">// Galeria</span>
-      <h2 class="section-h2">O robô mais<br><span class="p">brabo</span> do <span class="g">Brasil</span></h2>
+      <h2 class="section-h2" data-i18n="gallery-h2">O robô mais<br><span class="p">brabo</span> do <span class="g">Brasil</span></h2>
     </div>
     <div class="meme-grid">
       <div class="meme-item tall">
@@ -1281,14 +1627,14 @@ footer{
 </section>
 
 <!-- CTA COMUNIDADE -->
-<div class="ticker-sep"><div class="ts-track"><span>🤖 $GROKBRCoin</span><span>🚀 BASE CHAIN</span><span>🔥 LP QUEIMADA</span><span>💎 ZERO TAX</span><span>🇧🇷 É NÓS QUE TÁ</span><span>⚡ MOON PORRA</span><span>🐂 FORÇA TOTAL</span><span>🔒 HOLDER FIRM</span><span>🤖 $GROKBRCoin</span><span>🚀 BASE CHAIN</span><span>🔥 LP QUEIMADA</span><span>💎 ZERO TAX</span><span>🇧🇷 É NÓS QUE TÁ</span><span>⚡ MOON PORRA</span><span>🐂 FORÇA TOTAL</span><span>🔒 HOLDER FIRM</span></div></div>
+<div class="ticker-sep"><div class="ts-track"><span>⚡ EARLY = RICH</span><span>🔥 NEXT 1000X LOADING...</span><span>💎 0% TAX — 100% DO SEU DINHEIRO</span><span>🔒 LP QUEIMADA — NO RUG EVER</span><span>👥 +1.2K DEGENS & GROWING</span><span>🏦 BUILT ON BASE — COINBASE'S CHAIN</span><span>🚨 QUEM ESPERA, PERDE</span><span>🌎 A GALERA TÁ DENTRO — E VOCÊ?</span><span>⚡ EARLY = RICH</span><span>🔥 NEXT 1000X LOADING...</span><span>💎 0% TAX — 100% DO SEU DINHEIRO</span><span>🔒 LP QUEIMADA — NO RUG EVER</span><span>👥 +1.2K DEGENS & GROWING</span><span>🏦 BUILT ON BASE — COINBASE'S CHAIN</span><span>🚨 QUEM ESPERA, PERDE</span><span>🌎 A GALERA TÁ DENTRO — E VOCÊ?</span></div></div>
 
 <!-- CHAT COMUNIDADE -->
 <section id="chat" style="padding:100px 60px">
   <div class="section-inner">
-    <span class="section-label">// Papo da Galera</span>
-    <h2 class="section-h2">FALA <span class="g">GALERA</span><span class="r">!</span></h2>
-    <p class="section-lead" style="margin-bottom:40px">Manda sua print, compartilha sua bag, fala o que quiser — é nós que tá! 🤖</p>
+    <span class="section-label" data-i18n="comm-label">// Papo da Galera</span>
+    <h2 class="section-h2" data-i18n="comm-h2">FALA <span class="g">GALERA</span><span class="r">!</span></h2>
+    <p class="section-lead" style="margin-bottom:40px" data-i18n="comm-lead">Drop your screenshot, share your bag, say what you want — we're all in! 🤖</p>
     <div class="chat-wrap">
       <!-- Barra de apelido -->
       <div class="chat-nick" id="chatNickBar">
@@ -1323,13 +1669,13 @@ footer{
   </div>
 </section>
 
-<div class="ticker-sep"><div class="ts-track"><span>🤖 $GROKBRCoin</span><span>🚀 BASE CHAIN</span><span>🔥 LP QUEIMADA</span><span>💎 ZERO TAX</span><span>🇧🇷 É NÓS QUE TÁ</span><span>⚡ MOON PORRA</span><span>🐂 FORÇA TOTAL</span><span>🔒 HOLDER FIRM</span><span>🤖 $GROKBRCoin</span><span>🚀 BASE CHAIN</span><span>🔥 LP QUEIMADA</span><span>💎 ZERO TAX</span><span>🇧🇷 É NÓS QUE TÁ</span><span>⚡ MOON PORRA</span><span>🐂 FORÇA TOTAL</span><span>🔒 HOLDER FIRM</span></div></div>
+<div class="ticker-sep"><div class="ts-track"><span>⚡ EARLY = RICH</span><span>🔥 NEXT 1000X LOADING...</span><span>💎 0% TAX — 100% DO SEU DINHEIRO</span><span>🔒 LP QUEIMADA — NO RUG EVER</span><span>👥 +1.2K DEGENS & GROWING</span><span>🏦 BUILT ON BASE — COINBASE'S CHAIN</span><span>🚨 QUEM ESPERA, PERDE</span><span>🌎 A GALERA TÁ DENTRO — E VOCÊ?</span><span>⚡ EARLY = RICH</span><span>🔥 NEXT 1000X LOADING...</span><span>💎 0% TAX — 100% DO SEU DINHEIRO</span><span>🔒 LP QUEIMADA — NO RUG EVER</span><span>👥 +1.2K DEGENS & GROWING</span><span>🏦 BUILT ON BASE — COINBASE'S CHAIN</span><span>🚨 QUEM ESPERA, PERDE</span><span>🌎 A GALERA TÁ DENTRO — E VOCÊ?</span></div></div>
 
 <section class="cta-section" id="comunidade">
   <div class="cta-bg"></div>
   <div class="cta-inner">
-    <span class="section-label" style="display:block;margin-bottom:16px">// É Nós Que Tá</span>
-    <h2 class="cta-h2">
+    <span class="section-label" style="display:block;margin-bottom:16px" data-i18n="cta-label">// É Nós Que Tá</span>
+    <h2 class="cta-h2" data-i18n="cta-h2">
       <span style="color:var(--green)">CARALHO</span><br>
       <span style="color:var(--red)">VAI!</span> 🚀
     </h2>
@@ -1340,9 +1686,9 @@ footer{
       <span class="cta-urg-sep">·</span>
       <span>🔒 <b>LP queimada</b> pra sempre</span>
     </div>
-    <p class="cta-sub">Cada bloco que passa é um pump que você perdeu.</p>
+    <p class="cta-sub" data-i18n="cta-sub">Every block that passes is a pump you missed.</p>
     <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
-      <a href="#" onclick="showMaint(event)" class="btn-green" style="font-size:17px;padding:18px 48px">🚀 Comprar $GROKBRCoin</a>
+      <a href="#" onclick="showMaint(event)" class="btn-green" style="font-size:17px;padding:18px 48px" data-i18n="cta-btn">🚀 Comprar $GROKBRCoin</a>
       <a href="https://t.me/c/3925861991/1" target="_blank" class="btn-outline" style="font-size:17px;padding:18px 32px">💬 Telegram</a>
     </div>
     <div class="cta-socials">
@@ -1372,9 +1718,9 @@ footer{
       <li><a href="https://t.me/c/3925861991/1" target="_blank">Telegram</a></li>
       <li><a href="#" onclick="showMaint(event)">Dexscreener</a></li>
     </ul>
-    <div class="footer-disc">
+    <div class="footer-disc" data-i18n="footer-disc">
       $GROKBRCoin é uma memecoin criada para fins especulativos e de entretenimento. Não é conselho financeiro. Invista apenas o que pode perder totalmente. DYOR sempre.<br>
-      © 2026 $GROKBRCoin — O Grok do Brasil 🇧🇷 · É nós que tá.
+      © 2026 $GROKBRCoin — Brazil's Grok 🇧🇷 · We're so back.
     </div>
   </div>
 </footer>
@@ -1383,36 +1729,115 @@ footer{
 // Hamburger menu
 var hamburger=document.getElementById('hamburger');
 var navMobile=document.getElementById('navMobile');
-function closeMenu(){hamburger.classList.remove('open');navMobile.classList.remove('open');document.body.style.overflow='';}
+function closeMenu(){
+  hamburger.classList.remove('open');
+  navMobile.style.animation='nm-slide-out .32s cubic-bezier(.7,0,.8,1) forwards';
+  setTimeout(function(){
+    navMobile.classList.remove('open');
+    navMobile.style.animation='';
+    document.body.style.overflow='';
+  },300);
+}
 hamburger.addEventListener('click',function(){
-  var open=navMobile.classList.toggle('open');
-  hamburger.classList.toggle('open',open);
-  document.body.style.overflow=open?'hidden':'';
+  var open=!navMobile.classList.contains('open');
+  if(!open){closeMenu();return;}
+  // reseta animações dos links para que reiniciem ao reabrir
+  navMobile.querySelectorAll('.nm-link,.nm-cta-wrap,.nm-stats,.nm-ticker').forEach(function(el){
+    el.style.animation='none';
+    void el.offsetWidth; // força reflow
+    el.style.animation='';
+  });
+  navMobile.classList.add('open');
+  hamburger.classList.add('open');
+  document.body.style.overflow='hidden';
 });
 
 
 // ─── MODAL MANUTENÇÃO ───────────────────────────────────────
 var _maintBase = 847;
+var _maintTimerInterval = null;
+var _maintViewerInterval = null;
+var _maintReservingInterval = null;
+
 function showMaint(e){
   if(e){e.preventDefault();}
   var overlay = document.getElementById('maintOverlay');
   overlay.style.display='flex';
   document.body.style.overflow='hidden';
-  // Incrementa contador para FOMO
+
   _maintBase += Math.floor(Math.random()*3)+1;
   var el = document.getElementById('maintCount');
   if(el) el.textContent = _maintBase.toLocaleString('pt-BR');
-  // Atualiza vagas restantes
   var vagasLeft = Math.max(0, 1000 - _maintBase);
   var vEl = document.getElementById('maintVagasLeft');
   if(vEl) vEl.textContent = vagasLeft + ' restantes';
-  // Reinicia animação da barra
   var fill = document.getElementById('maintFill');
   if(fill){ fill.style.animation='none'; fill.offsetWidth; fill.style.animation='prog-grow 1.2s cubic-bezier(.16,1,.3,1) forwards'; }
+
+  _startMaintTimer();
+  _startMaintViewers();
+  _startMaintReserving();
 }
+
 function closeMaint(){
   document.getElementById('maintOverlay').style.display='none';
   document.body.style.overflow='';
+  clearInterval(_maintTimerInterval);
+  clearInterval(_maintViewerInterval);
+  clearInterval(_maintReservingInterval);
+}
+
+function _startMaintTimer(){
+  clearInterval(_maintTimerInterval);
+  // Pega ou cria o tempo de expiração na sessão
+  var key = 'grokbr-maint-exp';
+  var now = Date.now();
+  var exp = parseInt(sessionStorage.getItem(key)||'0');
+  if(!exp || exp < now){ exp = now + 12*60*1000; sessionStorage.setItem(key, exp); }
+
+  function _tick(){
+    var remaining = Math.max(0, exp - Date.now());
+    var m = Math.floor(remaining/60000);
+    var s = Math.floor((remaining%60000)/1000);
+    var str = (m<10?'0':'')+m+':'+(s<10?'0':'')+s;
+    var el = document.getElementById('maintTimer');
+    if(el){
+      el.textContent = str;
+      el.classList.toggle('urgent', m < 3);
+    }
+    if(remaining <= 0){
+      clearInterval(_maintTimerInterval);
+      // Reseta para novo ciclo de 5 min para criar urgência contínua
+      sessionStorage.setItem(key, Date.now() + 5*60*1000);
+    }
+  }
+  _tick();
+  _maintTimerInterval = setInterval(_tick, 1000);
+}
+
+function _startMaintViewers(){
+  clearInterval(_maintViewerInterval);
+  var v = 52 + Math.floor(Math.random()*30);
+  function _tick(){
+    v += (Math.random()>.45?1:-1) * (Math.floor(Math.random()*4)+1);
+    if(v<38) v=38+Math.floor(Math.random()*5);
+    if(v>112) v=112-Math.floor(Math.random()*5);
+    var el = document.getElementById('maintViewers');
+    if(el) el.textContent = v;
+  }
+  _maintViewerInterval = setInterval(_tick, 2200);
+}
+
+function _startMaintReserving(){
+  clearInterval(_maintReservingInterval);
+  var rates = ['2/min','3/min','4/min','3/min','5/min','2/min'];
+  var i = 0;
+  function _tick(){
+    i = (i+1)%rates.length;
+    var el = document.getElementById('maintReserving');
+    if(el) el.textContent = rates[i];
+  }
+  _maintReservingInterval = setInterval(_tick, 3500);
 }
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMaint();});
 // Live viewer counter - sobe e desce continuamente
@@ -1468,7 +1893,7 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMaint()
     el.innerHTML='<div class="bt-icon">'+String.fromCodePoint(0x1F4B8)+'</div>'
       +'<div class="bt-body">'
       +'<div class="bt-wallet">'+w+'</div>'
-      +'<div class="bt-action">'+act+' <b>'+a+' $GROKBR</b></div>'
+      +'<div class="bt-action">'+act+' <b>'+a+' $GROKBRCOIN</b></div>'
       +'<div class="bt-time">'+tm+'</div>'
       +'</div>';
     document.body.appendChild(el);
@@ -1701,7 +2126,7 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMaint()
         '<input id="regWallet" class="reg-input" placeholder="0x..." maxlength="42">',
       '</div>',
       '<button id="regSubmit" class="reg-submit">🚀 ENTRAR NA TROPA</button>',
-      '<p class="reg-terms">Ao entrar você aceita mandar só conteúdo da galera.<br>Zero drama, zero spam — é nós que tá! 🇧🇷</p>',
+      '<p class="reg-terms">Ao entrar você aceita mandar só conteúdo da galera.<br>Zero drama, zero spam — we run this! 🇧🇷</p>',
     '</div>'
   ].join('');
   document.body.appendChild(modal);
@@ -1771,16 +2196,17 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMaint()
   }
 })();
 
-// ─── HERO TITLE: float suave + retorno suave ao sair ───
+// ─── HERO TITLE: float hover (mobile/tablet only) ───
 (function(){
   var h1 = document.querySelector('.hero-h1');
   if(!h1) return;
+  // no desktop o h1 já tem animação contínua via CSS — não interfere
+  if(window.innerWidth >= 961) return;
   var ANIM = 'float-title 2s ease-in-out infinite';
   var returning = false;
 
   h1.addEventListener('mouseenter', function(){
     if(returning){
-      // cancela o retorno se o mouse voltou antes do fim
       clearTimeout(h1._returnTimer);
       h1.style.transition = '';
       h1.style.transform  = '';
@@ -1790,13 +2216,10 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMaint()
   });
 
   h1.addEventListener('mouseleave', function(){
-    // captura o transform exato do momento em que o mouse saiu
     var cur = getComputedStyle(h1).transform;
     h1.style.animation  = 'none';
     h1.style.transform  = cur;
-    // força reflow para o browser registrar o valor atual
     void h1.offsetWidth;
-    // suaviza o retorno ao zero
     returning = true;
     h1.style.transition = 'transform 0.65s cubic-bezier(0.25,1,0.5,1)';
     h1.style.transform  = 'translateY(0) rotate(0deg) scale(1)';
@@ -1822,21 +2245,21 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMaint()
     "1000x n\u00e3o vem batendo na porta... ele j\u00e1 entrou.",
     "Voc\u00ea veio passear ou veio ficar rico?",
     "O gr\u00e1fico s\u00f3 sobe pra quem t\u00e1 dentro.",
-    "Isso n\u00e3o \u00e9 aposta. \u00c9 intelig\u00eancia de rua.",
+    "This ain't gambling. This is street smart.",
     "Seu futuro t\u00e1 esperando voc\u00ea apertar o bot\u00e3o.",
     "A carteira n\u00e3o enche sozinha, parceiro.",
     "N\u00e3o \u00e9 sorte. \u00c9 estrat\u00e9gia.",
-    "Quem n\u00e3o arrisca, n\u00e3o petisca. E nem pumpa.",
+    "No risk, no reward. No balls, no gains.",
     "Voc\u00ea ainda t\u00e1 de fora? Corre!",
     "O pr\u00f3ximo bull run come\u00e7a com uma decis\u00e3o.",
     "Voc\u00ea quer esperar mais ou entrar agora?",
     "O gr\u00e1fico n\u00e3o mente. Voc\u00ea ainda duvida?",
     "T\u00e1 esperando o qu\u00ea? A lua n\u00e3o espera.",
-    "Cada segundo fora \u00e9 um pump perdido.",
+    "Every second out is a pump missed.",
     "Memecoin n\u00e3o \u00e9 brincadeira. \u00c9 revolu\u00e7\u00e3o.",
     "GrokBRCoin: a IA que fala a l\u00edngua do povo.",
     "Enquanto voc\u00ea hesita, outro est\u00e1 comprando.",
-    "Zero bullshit. 100% pump sincero.",
+    "Zero BS. 100% real pump energy.",
     "Voc\u00ea t\u00e1 aqui por acaso? Acho que n\u00e3o.",
     "Os early adopters sempre riem por \u00faltimo."
   ];
@@ -1870,8 +2293,22 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMaint()
     <button class="maint-close" onclick="closeMaint()">✕</button>
     <span class="maint-icon">🤖</span>
     <div class="maint-badge">⚙️ Em Breve</div>
-    <h3 class="maint-title">Quase lá,<br><span>irmão!</span></h3>
+    <h3 class="maint-title">Almost there,<br><span>fam!</span></h3>
     <p class="maint-desc">O contrato está na <strong>auditoria final</strong>. Mas você pode garantir agora sua vaga VIP e ser o primeiro a comprar na abertura.</p>
+    <div class="maint-timer-wrap">
+      <div>
+        <div class="maint-timer-label">⏳ Oferta expira em</div>
+        <div class="maint-timer-count" id="maintTimer">12:00</div>
+      </div>
+      <div style="text-align:right">
+        <div class="maint-timer-label">🔥 Vagas sendo reservadas</div>
+        <div style="font-family:'Bangers',cursive;font-size:22px;color:#ffd600;letter-spacing:2px" id="maintReserving">3/min</div>
+      </div>
+    </div>
+    <div class="maint-live-bar">
+      <span class="maint-live-dot"></span>
+      <span><span class="maint-live-num" id="maintViewers">67</span> pessoas vendo essa oferta agora</span>
+    </div>
     <div class="maint-progress-wrap">
       <div class="maint-progress-label"><span>Vagas VIP disponíveis</span><span id="maintVagasLeft">163 restantes</span></div>
       <div class="maint-progress-bar"><div class="maint-progress-fill" id="maintFill"></div></div>
@@ -1886,6 +2323,368 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMaint()
     <p class="maint-urgency">⏰ Os primeiros <b>1.000 da lista</b> recebem bônus exclusivo de holder fundador.<br>Após isso, preço de mercado normal.</p>
   </div>
 </div>
+
+<!-- ═══ LANGUAGE FLOAT BUTTON ═══ -->
+<style>
+.lang-fab{
+  position:fixed;
+  bottom:28px;left:24px;
+  z-index:9000;
+  display:flex;align-items:center;gap:8px;
+  background:#080b14;
+  border:1px solid rgba(0,255,148,.25);
+  border-radius:100px;
+  padding:9px 16px 9px 12px;
+  cursor:pointer;
+  box-shadow:0 4px 24px rgba(0,0,0,.5),0 0 16px rgba(0,255,148,.08);
+  transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;
+  -webkit-tap-highlight-color:transparent;
+  animation:fab-in .5s 1.2s cubic-bezier(.16,1,.3,1) both;
+}
+@keyframes fab-in{
+  from{transform:translateY(20px);opacity:0}
+  to{transform:translateY(0);opacity:1}
+}
+.lang-fab:hover{
+  transform:translateY(-3px);
+  box-shadow:0 8px 32px rgba(0,0,0,.5),0 0 24px rgba(0,255,148,.15);
+  border-color:rgba(0,255,148,.5);
+}
+.lang-fab:active{transform:scale(.96)}
+.lang-fab-globe{font-size:16px;line-height:1}
+.lang-fab-label{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:11px;font-weight:700;letter-spacing:1.5px;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.55);
+  white-space:nowrap;
+}
+.lang-fab-lang{
+  font-family:'Bangers',cursive;
+  font-size:13px;letter-spacing:1px;
+  color:var(--green);
+  margin-left:2px;
+}
+</style>
+
+<button class="lang-fab" id="langFab" onclick="lpOpen()" aria-label="Change language">
+  <span class="lang-fab-globe">🌐</span>
+  <span class="lang-fab-label">Lang</span>
+  <span class="lang-fab-lang" id="fabLangTag">Hybrid</span>
+</button>
+
+<!-- ═══ LANGUAGE PICKER ═══ -->
+<style>
+.lp-overlay{
+  position:fixed;inset:0;z-index:99999;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(0,0,0,.45);backdrop-filter:blur(6px);
+  animation:lp-fade .3s ease;
+}
+@keyframes lp-fade{from{opacity:0}to{opacity:1}}
+.lp-modal{
+  background:rgba(6,10,18,.72);
+  backdrop-filter:blur(24px);
+  -webkit-backdrop-filter:blur(24px);
+  border:1px solid rgba(0,255,148,.22);
+  border-radius:24px;
+  padding:44px 40px 36px;
+  max-width:480px;width:92%;
+  text-align:center;
+  position:relative;
+  box-shadow:0 0 80px rgba(0,255,148,.07),0 32px 80px rgba(0,0,0,.6);
+  animation:lp-slide .4s cubic-bezier(.16,1,.3,1);
+}
+@keyframes lp-slide{from{transform:translateY(32px);opacity:0}to{transform:translateY(0);opacity:1}}
+.lp-flag{font-size:40px;margin-bottom:12px}
+.lp-title{
+  font-family:'Bangers',cursive;
+  font-size:32px;letter-spacing:3px;text-transform:uppercase;
+  color:#fff;margin-bottom:6px;
+}
+.lp-sub{font-size:13px;color:rgba(255,255,255,.4);margin-bottom:32px;line-height:1.6}
+.lp-options{display:flex;flex-direction:column;gap:12px;margin-bottom:28px}
+.lp-btn{
+  display:flex;align-items:center;gap:14px;
+  padding:16px 20px;border-radius:14px;
+  border:1px solid rgba(255,255,255,.1);
+  background:rgba(255,255,255,.04);
+  cursor:pointer;text-align:left;
+  transition:all .2s ease;
+  -webkit-tap-highlight-color:transparent;
+}
+.lp-btn:hover{border-color:rgba(0,255,148,.4);background:rgba(0,255,148,.07);transform:translateX(4px)}
+.lp-btn.active{border-color:rgba(0,255,148,.6);background:rgba(0,255,148,.1)}
+.lp-btn-icon{font-size:26px;flex-shrink:0}
+.lp-btn-info{flex:1}
+.lp-btn-name{font-family:'Bangers',cursive;font-size:18px;letter-spacing:2px;color:#fff}
+.lp-btn-desc{font-size:11px;color:rgba(255,255,255,.4);margin-top:2px}
+.lp-btn-check{
+  width:20px;height:20px;border-radius:50%;
+  border:2px solid rgba(255,255,255,.2);
+  flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .2s;
+}
+.lp-btn.active .lp-btn-check{background:var(--green);border-color:var(--green);color:#000;font-size:11px}
+.lp-confirm{
+  width:100%;background:var(--green);color:#000;
+  font-family:'Bangers',cursive;font-size:20px;letter-spacing:2px;
+  padding:15px;border-radius:12px;border:none;cursor:pointer;
+  transition:opacity .2s,transform .15s,box-shadow .2s;
+  box-shadow:0 4px 32px rgba(0,255,148,.25);
+}
+.lp-confirm:hover{opacity:.9;transform:translateY(-2px);box-shadow:0 8px 40px rgba(0,255,148,.4)}
+.lp-confirm:active{transform:translateY(0)}
+.lp-remember{font-size:10px;color:rgba(255,255,255,.2);margin-top:12px}
+</style>
+
+<div class="lp-overlay" id="lpOverlay" style="display:none">
+  <div class="lp-modal">
+    <div class="lp-flag">🇧🇷</div>
+    <div class="lp-title">Choose Your Language</div>
+    <p class="lp-sub">Selecione como quer ler o site.<br>You can change this anytime.</p>
+    <div class="lp-options">
+      <button class="lp-btn active" data-lang="hybrid" onclick="lpSelect(this)">
+        <span class="lp-btn-icon">🔀</span>
+        <div class="lp-btn-info">
+          <div class="lp-btn-name">Híbrido</div>
+          <div class="lp-btn-desc">PT + EN slang — o melhor dos dois mundos</div>
+        </div>
+        <div class="lp-btn-check">✓</div>
+      </button>
+      <button class="lp-btn" data-lang="pt" onclick="lpSelect(this)">
+        <span class="lp-btn-icon">🇧🇷</span>
+        <div class="lp-btn-info">
+          <div class="lp-btn-name">Português</div>
+          <div class="lp-btn-desc">100% em português — sem estrangeirismo</div>
+        </div>
+        <div class="lp-btn-check"></div>
+      </button>
+      <button class="lp-btn" data-lang="en" onclick="lpSelect(this)">
+        <span class="lp-btn-icon">🇺🇸</span>
+        <div class="lp-btn-info">
+          <div class="lp-btn-name">English</div>
+          <div class="lp-btn-desc">Full English — for the international degens</div>
+        </div>
+        <div class="lp-btn-check"></div>
+      </button>
+    </div>
+    <button class="lp-confirm" onclick="lpConfirm()">Confirmar / Confirm</button>
+    <div class="lp-remember">Sua escolha será lembrada · Your choice will be saved</div>
+  </div>
+</div>
+
+<script>
+// ═══ TRANSLATION SYSTEM ═══
+var LP_TRANSLATIONS = {
+  hybrid: {
+    'hero-tagline': "Brazil's Grok, no cap! 🇧🇷",
+    'hero-desc': 'AI with <strong>street smarts</strong>. Sarcástico, direto e sem frescura.<br><strong>1000x ou nada.</strong> Let\'s f*cking go. 🚀',
+    'hero-btn-buy': '🚀 Comprar $GrokBRcoin <span class="btn-badge">Zero Tax</span>',
+    'hero-btn-learn': 'Saber Mais',
+    'trust-1': '🔒 <b>Carteira segura</b>',
+    'trust-2': '🔥 <b>LP queimada</b>',
+    'trust-3': '⚡ <b>Base Chain</b>',
+    'nav-sobre': 'Sobre',
+    'nav-comprar': 'Como Comprar',
+    'nav-galeria': 'Galeria',
+    'nav-cta': '🚀 Participar Agora',
+    'about-label': '// Sobre o Projeto',
+    'about-h2': 'IA com alma<br><span class="g">brasileira</span><span class="p">.</span>',
+    'about-lead': 'Juntamos a IA mais avançada do mundo com a malandragem brasileira. No 80-page whitepaper. No BS. Just memes, community and real pump energy.',
+    'feat1-title': 'Street Smart AI',
+    'feat1-desc': 'O Grok da xAI caiu no caldeirão brasileiro. O resultado foi esse robô debochado que você vê.',
+    'feat2-title': 'Zero BS',
+    'feat2-desc': 'Sem whitepaper de 80 páginas, sem promessa vazia, sem dev sumindo. Só comunidade raiz.',
+    'feat3-title': 'Diamond Hands',
+    'feat3-desc': 'Community that never folds. While the market bleeds, we HODL and pump harder.',
+    'feat4-title': '100% Brasileiro',
+    'feat4-desc': 'The first memecoin that speaks the people\'s language. Raw, unfiltered, no cap.',
+    'tok-label': '// Tokenomics',
+    'tok-h2': 'Simples.<br><span class="g">Transparente.</span> Sem papo.',
+    'tok-desc': 'Supply fixo de <strong style="color:var(--white)">1 bilhão</strong> para sempre. Enquanto outros projetos imprimem tokens e diluem você, o $GROKBRCoin não tem como.',
+    'htb-label': '// Como Comprar',
+    'htb-h2': 'Fácil que nem<br><span class="g">respirar</span><span class="r">.</span>',
+    'htb1-title': 'Get a Wallet',
+    'htb1-desc': 'Download Coinbase Wallet or MetaMask. Already got one? Skip ahead, fam.',
+    'htb2-title': 'Add ETH na Base',
+    'htb2-desc': 'Compra ETH em qualquer exchange e manda pra rede Base. Sem ETH, no $GROKBRCoin.',
+    'htb3-title': 'Vai na Uniswap',
+    'htb3-desc': 'Conecta a carteira na Uniswap v4 e cola o CA. Simples assim.',
+    'htb4-title': 'Buy & HODL',
+    'htb4-desc': 'Swap it, bag it and HODL the pump. Diamond hands, fam. LFG.',
+    'htb-cta': '🚀 Comprar $GROKBRCoin Agora',
+    'gallery-h2': 'O robô mais<br><span class="p">brabo</span> do <span class="g">Brasil</span>',
+    'comm-label': '// Papo da Galera',
+    'comm-h2': 'FALA <span class="g">GALERA</span><span class="r">!</span>',
+    'comm-lead': 'Drop your screenshot, share your bag, fala o que quiser — we\'re all in! 🤖',
+    'cta-label': '// We\'re So Back',
+    'cta-h2': '<span style="color:var(--green)">LET\'S F*CKING</span><br><span style="color:var(--red)">GO!</span> 🚀',
+    'cta-sub': 'Every block that passes is a pump you missed.',
+    'cta-btn': '🚀 Comprar $GROKBRCoin',
+    'footer-disc': '$GROKBRCoin é uma memecoin para fins especulativos. Not financial advice. Only invest what you can afford to lose. DYOR.<br>© 2026 $GROKBRCoin — Brazil\'s Grok 🇧🇷 · We\'re so back.'
+  },
+  pt: {
+    'hero-tagline': 'O Grok do Brasil, sem papo! 🇧🇷',
+    'hero-desc': 'IA com <strong>inteligência de rua</strong>. Sarcástico, direto e sem enrolação.<br><strong>1000x ou nada.</strong> Vamos nessa. 🚀',
+    'hero-btn-buy': '🚀 Comprar $GrokBRcoin <span class="btn-badge">Zero Tax</span>',
+    'hero-btn-learn': 'Saber Mais',
+    'trust-1': '🔒 <b>Carteira segura</b>',
+    'trust-2': '🔥 <b>LP queimada</b>',
+    'trust-3': '⚡ <b>Base Chain</b>',
+    'nav-sobre': 'Sobre',
+    'nav-comprar': 'Como Comprar',
+    'nav-galeria': 'Galeria',
+    'nav-cta': '🚀 Participar Agora',
+    'about-label': '// Sobre o Projeto',
+    'about-h2': 'IA com alma<br><span class="g">brasileira</span><span class="p">.</span>',
+    'about-lead': 'Juntamos a IA mais avançada do mundo com a malandragem brasileira. Sem whitepaper de 80 páginas, sem promessa vazia. Só meme, comunidade e pump.',
+    'feat1-title': 'IA com Inteligência de Rua',
+    'feat1-desc': 'O Grok da xAI caiu no caldeirão brasileiro. O resultado foi esse robô debochado que você vê.',
+    'feat2-title': 'Zero Conversa',
+    'feat2-desc': 'Sem whitepaper de 80 páginas, sem promessa vazia, sem dev sumindo. Só comunidade raiz.',
+    'feat3-title': 'Mão de Diamante',
+    'feat3-desc': 'Comunidade que nunca fraqueja. Enquanto o mercado sangra, a gente segura e pumpa mais forte.',
+    'feat4-title': '100% Brasileiro',
+    'feat4-desc': 'A primeira memecoin que fala a língua do povo. Sem frescura, sem censura, sem papo.',
+    'tok-label': '// Tokenomics',
+    'tok-h2': 'Simples.<br><span class="g">Transparente.</span> Sem papo.',
+    'tok-desc': 'Supply fixo de <strong style="color:var(--white)">1 bilhão</strong> para sempre. Enquanto outros projetos imprimem tokens e diluem você, o $GROKBRCoin não tem como.',
+    'htb-label': '// Como Comprar',
+    'htb-h2': 'Fácil que nem<br><span class="g">respirar</span><span class="r">.</span>',
+    'htb1-title': 'Cria a Carteira',
+    'htb1-desc': 'Baixa a Coinbase Wallet ou MetaMask. Já tem? Pula pro próximo passo.',
+    'htb2-title': 'Coloca ETH na Base',
+    'htb2-desc': 'Compra ETH em qualquer exchange e manda pra rede Base. Sem ETH, sem $GROKBRCoin.',
+    'htb3-title': 'Vai na Uniswap',
+    'htb3-desc': 'Conecta a carteira na Uniswap v4 e cola o CA do $GROKBRCoin. Simples assim.',
+    'htb4-title': 'Compra e Segura',
+    'htb4-desc': 'Faz o swap, bota na carteira e segura firme. Mão de diamante. Vamos nessa.',
+    'htb-cta': '🚀 Comprar $GROKBRCoin Agora',
+    'gallery-h2': 'O robô mais<br><span class="p">brabo</span> do <span class="g">Brasil</span>',
+    'comm-label': '// Papo da Galera',
+    'comm-h2': 'FALA <span class="g">GALERA</span><span class="r">!</span>',
+    'comm-lead': 'Manda sua print, compartilha sua bag, fala o que quiser — é nós! 🤖',
+    'cta-label': '// É Nós Que Tá',
+    'cta-h2': '<span style="color:var(--green)">VAMOS</span><br><span style="color:var(--red)">LÁ!</span> 🚀',
+    'cta-sub': 'Cada bloco que passa é um pump que você perdeu.',
+    'cta-btn': '🚀 Comprar $GROKBRCoin',
+    'footer-disc': '$GROKBRCoin é uma memecoin criada para fins especulativos e de entretenimento. Não é conselho financeiro. Invista apenas o que pode perder totalmente. DYOR sempre.<br>© 2026 $GROKBRCoin — O Grok do Brasil 🇧🇷'
+  },
+  en: {
+    'hero-tagline': "Brazil's Grok, no cap! 🇧🇷",
+    'hero-desc': 'AI with <strong>street smarts</strong>. Sarcastic, raw and no cap.<br><strong>1000x or nothing.</strong> Let\'s f*cking go. 🚀',
+    'hero-btn-buy': '🚀 Buy $GrokBRcoin <span class="btn-badge">Zero Tax</span>',
+    'hero-btn-learn': 'Learn More',
+    'trust-1': '🔒 <b>Safe wallet</b>',
+    'trust-2': '🔥 <b>Burned LP</b>',
+    'trust-3': '⚡ <b>Base Chain</b>',
+    'nav-sobre': 'About',
+    'nav-comprar': 'How to Buy',
+    'nav-galeria': 'Gallery',
+    'nav-cta': '🚀 Join Now',
+    'about-label': '// About',
+    'about-h2': 'AI with a<br><span class="g">Brazilian soul</span><span class="p">.</span>',
+    'about-lead': "We merged the world's most advanced AI with Brazilian street energy. No 80-page whitepaper. No BS. Just memes, community and real pump energy.",
+    'feat1-title': 'Street Smart AI',
+    'feat1-desc': "xAI's Grok dropped into the Brazilian melting pot. The result? This unhinged bot you see right here.",
+    'feat2-title': 'Zero BS',
+    'feat2-desc': 'No 80-page whitepaper, no empty promises, no dev rugging. Just raw community vibes.',
+    'feat3-title': 'Diamond Hands',
+    'feat3-desc': 'Community that never folds. While the market bleeds, we HODL and pump harder.',
+    'feat4-title': '100% Brazilian',
+    'feat4-desc': "The first memecoin that speaks the people's language. Raw, unfiltered, no cap.",
+    'tok-label': '// Tokenomics',
+    'tok-h2': 'Simple.<br><span class="g">Transparent.</span> No BS.',
+    'tok-desc': 'Fixed supply of <strong style="color:var(--white)">1 billion</strong> forever. While other projects mint tokens and dilute you, $GROKBRCoin simply can\'t.',
+    'htb-label': '// How to Buy',
+    'htb-h2': 'Easy as<br><span class="g">breathing</span><span class="r">.</span>',
+    'htb1-title': 'Get a Wallet',
+    'htb1-desc': 'Download Coinbase Wallet or MetaMask. Already got one? Skip ahead, fam.',
+    'htb2-title': 'Add ETH on Base',
+    'htb2-desc': 'Buy ETH on any exchange and bridge to Base network. No ETH, no $GROKBRCoin.',
+    'htb3-title': 'Go to Uniswap',
+    'htb3-desc': 'Connect your wallet on Uniswap v4 and paste the $GROKBRCoin CA. That\'s it.',
+    'htb4-title': 'Buy & HODL',
+    'htb4-desc': 'Swap it, bag it and HODL the pump. Diamond hands, fam. LFG.',
+    'htb-cta': '🚀 Buy $GROKBRCoin Now',
+    'gallery-h2': 'The most<br><span class="p">savage</span> bot in <span class="g">Brazil</span>',
+    'comm-label': '// Community Chat',
+    'comm-h2': 'TALK TO THE <span class="g">GANG</span><span class="r">!</span>',
+    'comm-lead': "Drop your screenshot, share your bag, say what you want — we're all in! 🤖",
+    'cta-label': "// We're So Back",
+    'cta-h2': '<span style="color:var(--green)">LET\'S</span><br><span style="color:var(--red)">GO!</span> 🚀',
+    'cta-sub': 'Every block that passes is a pump you missed.',
+    'cta-btn': '🚀 Buy $GROKBRCoin',
+    'footer-disc': '$GROKBRCoin is a memecoin created for speculative and entertainment purposes. Not financial advice. Only invest what you can afford to lose. DYOR.<br>© 2026 $GROKBRCoin — Brazil\'s Grok 🇧🇷 · We\'re so back.'
+  }
+};
+
+var _lpSelected = 'hybrid';
+
+function lpSelect(btn){
+  document.querySelectorAll('.lp-btn').forEach(function(b){
+    b.classList.remove('active');
+    b.querySelector('.lp-btn-check').innerHTML='';
+  });
+  btn.classList.add('active');
+  btn.querySelector('.lp-btn-check').innerHTML='✓';
+  _lpSelected = btn.getAttribute('data-lang');
+}
+
+function lpApply(lang){
+  var t = LP_TRANSLATIONS[lang];
+  if(!t) return;
+  document.querySelectorAll('[data-i18n]').forEach(function(el){
+    var key = el.getAttribute('data-i18n');
+    if(t[key] !== undefined) el.innerHTML = t[key];
+  });
+  document.documentElement.setAttribute('data-lang', lang);
+}
+
+var _fabLabels = {hybrid:'Hybrid', pt:'PT 🇧🇷', en:'EN 🇺🇸'};
+
+function lpOpen(){
+  // garante sincronia com o que foi salvo
+  var saved = localStorage.getItem('grokbr-lang');
+  if(saved && LP_TRANSLATIONS[saved]) _lpSelected = saved;
+
+  var ov = document.getElementById('lpOverlay');
+  document.querySelectorAll('.lp-btn').forEach(function(b){
+    var isActive = b.getAttribute('data-lang') === _lpSelected;
+    b.classList.toggle('active', isActive);
+    b.querySelector('.lp-btn-check').innerHTML = isActive ? '✓' : '';
+  });
+  ov.style.display='flex';
+  ov.style.animation='lp-fade .3s ease';
+}
+
+function lpConfirm(){
+  localStorage.setItem('grokbr-lang', _lpSelected);
+  lpApply(_lpSelected);
+  // atualiza label do FAB
+  var tag = document.getElementById('fabLangTag');
+  if(tag) tag.textContent = _fabLabels[_lpSelected] || _lpSelected;
+  var ov = document.getElementById('lpOverlay');
+  ov.style.animation='lp-fade .25s ease reverse forwards';
+  setTimeout(function(){ ov.style.display='none'; }, 240);
+}
+
+(function(){
+  var saved = localStorage.getItem('grokbr-lang');
+  if(saved && LP_TRANSLATIONS[saved]){
+    _lpSelected = saved;
+    lpApply(saved);
+    var tag = document.getElementById('fabLangTag');
+    if(tag) tag.textContent = _fabLabels[saved] || saved;
+  } else {
+    setTimeout(function(){
+      document.getElementById('lpOverlay').style.display='flex';
+    }, 800);
+  }
+})();
+</script>
 
 </body>
 </html>
