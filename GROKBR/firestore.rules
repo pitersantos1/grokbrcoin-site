@@ -1,0 +1,67 @@
+rules_version = '2';
+
+// ═══════════════════════════════════════════════════════════════
+// GROKBR — Firestore Security Rules
+// Publicar em: Firebase Console → Firestore Database → Regras
+// OU via CLI: firebase deploy --only firestore:rules
+// ═══════════════════════════════════════════════════════════════
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ─── waitlist (signup do airdrop) ───
+    // Público pode criar (com validação de shape), NUNCA ler.
+    // Leitura só via Admin SDK server-side (Cloud Function) ou
+    // usuários autenticados com custom claim admin=true.
+    match /waitlist/{emailKey} {
+      allow read: if request.auth != null && request.auth.token.admin == true;
+      allow create: if isValidWaitlistPayload(request.resource.data)
+                    && !exists(/databases/$(database)/documents/waitlist/$(emailKey));
+      allow update, delete: if request.auth != null && request.auth.token.admin == true;
+    }
+
+    // ─── users (registro de username via MetaMask) ───
+    // Doc ID = wallet address (lowercase hex).
+    match /users/{wallet} {
+      allow read: if true; // username lookup é público
+      allow create: if isValidWallet(wallet)
+                    && isValidUserPayload(request.resource.data)
+                    && request.resource.data.wallet == wallet;
+      allow update, delete: if false; // imutável pelo cliente (use Cloud Function)
+    }
+
+    // ─── usernames (índice reverso para garantir unicidade atômica) ───
+    // Doc ID = username_lower. Criar só se não existir.
+    match /usernames/{usernameLower} {
+      allow read: if true;
+      allow create: if request.resource.data.wallet is string
+                    && isValidWallet(request.resource.data.wallet)
+                    && usernameLower.matches('^[a-z0-9_]{3,24}$');
+      allow update, delete: if false;
+    }
+  }
+
+  // ─── helpers ───
+  function isValidWallet(w) {
+    return w is string && w.matches('^0x[a-f0-9]{40}$');
+  }
+
+  function isValidWaitlistPayload(d) {
+    return d.keys().hasOnly(['email','wallet','ref','myRef','ts','date','userAgent'])
+        && d.email is string && d.email.size() <= 120
+        && d.email.matches('^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$')
+        && (d.wallet == null || isValidWallet(d.wallet))
+        && (d.ref == null    || (d.ref is string && d.ref.size() <= 20))
+        && (d.myRef == null  || (d.myRef is string && d.myRef.size() <= 20))
+        && d.ts is int
+        && d.userAgent is string && d.userAgent.size() <= 200;
+  }
+
+  function isValidUserPayload(d) {
+    return d.keys().hasOnly(['wallet','username','username_lower','createdAt'])
+        && d.username is string
+        && d.username.size() >= 3 && d.username.size() <= 24
+        && d.username.matches('^[a-zA-Z0-9_]+$')
+        && d.username_lower == d.username.lower();
+  }
+}

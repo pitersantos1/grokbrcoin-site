@@ -1,0 +1,1083 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>$GrokBRcoin — O Grok do Brasil</title>
+<meta name="description" content="$GrokBRcoin — A meme coin brasileira com AI, Zero Tax, LP queimada e comunidade na Base Chain. 1000x or nothing. 🇧🇷🚀">
+<meta name="keywords" content="GrokBRcoin, meme coin, Brasil, crypto, Base Chain, Zero Tax, token">
+<meta property="og:title" content="$GrokBRcoin — O Grok do Brasil">
+<meta property="og:description" content="A meme coin brasileira com AI, Zero Tax e LP queimada. 1000x or nothing. 🇧🇷🚀">
+<meta property="og:type" content="website">
+<meta property="og:image" content="assets/images/mascot/GROKBR2_2_-removebg-preview.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="$GrokBRcoin — O Grok do Brasil">
+<meta name="twitter:description" content="A meme coin brasileira com AI, Zero Tax e LP queimada. 🇧🇷🚀">
+<meta name="twitter:image" content="assets/images/mascot/GROKBR2_2_-removebg-preview.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Oswald:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="canonical" href="https://grokbrcoin.com/">
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo"><span class="nl-dollar">$</span><span class="nl-grok">Grok</span><span class="nl-br">BRcoin</span></div>
+  <ul class="nav-menu">
+    <li><a href="#sobre" data-i18n="nav-sobre">Sobre</a></li>
+    <li><a href="#tokenomics">Tokenomics</a></li>
+    <li><a href="#contrato">Contrato</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#comprar" data-i18n="nav-comprar">Como Comprar</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="register.html">💬 Chat</a></li>
+    <li><button class="nav-connect" id="navConnect" onclick="navConnectWallet()">🔗 Conectar Wallet</button></li>
+    <li><a href="https://app.uniswap.org/swap" target="_blank" rel="noopener noreferrer" class="nav-buy">🦄 Comprar</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="nav-mobile" id="navMobile">
+  <div class="nm-bg"></div>
+  <div class="nm-blob1"></div>
+  <div class="nm-blob2"></div>
+  <div class="nm-grid"></div>
+
+  <div class="nm-header">
+    <div class="nm-logo">$GrokBRcoin</div>
+    <div class="nm-live"><span class="nm-live-dot"></span>AO VIVO</div>
+  </div>
+
+  <nav class="nm-nav">
+    <a href="#sobre" class="nm-link" onclick="closeMenu()">
+      <span class="nm-num">01</span>
+      <span class="nm-text">Sobre</span>
+      <span class="nm-arr">→</span>
+    </a>
+    <a href="#tokenomics" class="nm-link" onclick="closeMenu()">
+      <span class="nm-num">02</span>
+      <span class="nm-text">Tokenomics</span>
+      <span class="nm-arr">→</span>
+    </a>
+    <a href="#comprar" class="nm-link" onclick="closeMenu()">
+      <span class="nm-num">03</span>
+      <span class="nm-text">Como Comprar</span>
+      <span class="nm-arr">→</span>
+    </a>
+    <a href="#galeria" class="nm-link" onclick="closeMenu()">
+      <span class="nm-num">04</span>
+      <span class="nm-text">Galeria</span>
+      <span class="nm-arr">→</span>
+    </a>
+  </nav>
+
+  <div class="nm-cta-wrap">
+    <a href="#comunidade" class="nm-cta" onclick="closeMenu()">🚀 Participar Agora</a>
+  </div>
+
+  <div class="nm-stats">
+    <span class="nm-stat">✅ Zero Tax</span>
+    <span class="nm-stat">🔥 LP Queimada</span>
+    <span class="nm-stat">⚡ Base Chain</span>
+    <span class="nm-stat">💎 1B Supply</span>
+  </div>
+
+  <div class="nm-ticker">
+    <div class="nm-ticker-track">
+      <span>🚀 $GROKBRCOIN</span><span>✦ ZERO TAX</span><span>✦ 1000X</span><span>✦ LP QUEIMADA</span><span>✦ É NÓS QUE TÁ</span><span>✦ BASE CHAIN</span><span>✦ CARALHO VAI</span>
+      <span>🚀 $GROKBRCOIN</span><span>✦ ZERO TAX</span><span>✦ 1000X</span><span>✦ LP QUEIMADA</span><span>✦ É NÓS QUE TÁ</span><span>✦ BASE CHAIN</span><span>✦ CARALHO VAI</span>
+    </div>
+  </div>
+</div>
+
+<!-- LAUNCH COUNTDOWN BANNER -->
+<div class="launch-banner" id="launchBanner">
+  <div class="launch-banner-inner">
+    <div class="launch-banner-left">
+      <span class="launch-pulse"></span>
+      <span class="launch-label">🚀 Launch oficial em:</span>
+    </div>
+    <div class="launch-countdown" id="launchCountdown">
+      <div class="lc-unit"><div class="lc-num" id="lcDays">--</div><div class="lc-lbl">dias</div></div>
+      <div class="lc-sep">:</div>
+      <div class="lc-unit"><div class="lc-num" id="lcHours">--</div><div class="lc-lbl">horas</div></div>
+      <div class="lc-sep">:</div>
+      <div class="lc-unit"><div class="lc-num" id="lcMins">--</div><div class="lc-lbl">min</div></div>
+      <div class="lc-sep">:</div>
+      <div class="lc-unit"><div class="lc-num" id="lcSecs">--</div><div class="lc-lbl">seg</div></div>
+    </div>
+    <a href="https://t.me/c/3925861991/1" target="_blank" rel="noopener noreferrer" class="launch-cta">Entrar na lista →</a>
+    <button class="launch-close" onclick="closeLaunchBanner()" aria-label="Fechar">✕</button>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <img class="hero-candles" src="assets/images/mascot/ideogram-v3.0_..._irregular_glowing_green_and_red_candlestick_chart_with_vertical_dripping_neo-0-removebg-preview.png" alt="" width="1200" height="600" loading="eager" decoding="async">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-tag"><span></span> Memecoin Brasileira · Base Chain</div>
+
+      <div class="hero-tagline" data-i18n="hero-tagline">Brazil's Grok, no cap! 🇧🇷</div>
+      <p class="hero-desc" data-i18n="hero-desc">
+        AI with <strong>street smarts</strong>. Sarcastic, raw and no cap.<br>
+        <strong>1000x or nothing.</strong> Let's f*cking go. 🚀
+      </p>
+      <div class="hero-actions">
+        <a href="https://app.uniswap.org/swap" target="_blank" rel="noopener noreferrer" class="btn-green">
+          🦄 Comprar no Uniswap
+          <span class="btn-badge">Zero Tax</span>
+        </a>
+        <a href="register.html" class="btn-outline">💬 Entrar no Chat</a>
+        <div class="btn-trust">
+          <span data-i18n="trust-1">🔒 <b>Carteira segura</b></span>
+          <span data-i18n="trust-2">🔥 <b>LP queimada</b></span>
+          <span data-i18n="trust-3">⚡ <b>Base Chain</b></span>
+        </div>
+      </div>
+      <div class="hero-pills">
+        <div class="pill green" data-tip="Sem taxas — você fica com 100% do valor">✅ Zero Tax</div>
+        <div class="pill green" data-tip="LP destruída para sempre — ninguém puxa o tapete">🔥 LP Queimada</div>
+        <div class="pill" data-tip="Rede da Coinbase: rápido e barato como deve ser">⚡ Base Chain</div>
+        <div class="pill" data-tip="Supply fixo, imutável — inflação? Zero.">💎 1 Bilhão Supply</div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="mascot-glow1"></div>
+      <div class="mascot-glow2"></div>
+      <div class="mascot-wrap">
+        <img class="mascot-img" src="assets/images/mascot/mascot.png" alt="$GROKBRCoin Mascote">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CA STRIP (Contrato Oficial — destaque abaixo do hero) -->
+<section class="ca-strip" aria-labelledby="caStripTitle">
+  <div class="ca-strip-inner">
+    <div class="ca-strip-glow" aria-hidden="true"></div>
+
+    <div class="ca-strip-head">
+      <div class="ca-strip-shield" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2 4 5v7c0 5 3.5 8.5 8 10 4.5-1.5 8-5 8-10V5l-8-3z"/>
+          <path d="m9 12 2 2 4-4"/>
+        </svg>
+      </div>
+      <div class="ca-strip-titles">
+        <span class="ca-strip-label">// Contrato Oficial · CA</span>
+        <h2 id="caStripTitle" class="ca-strip-title">
+          Endereço <span class="g">verificado</span> na <span class="b">Base</span><span class="r">.</span>
+        </h2>
+      </div>
+      <div class="ca-strip-badges">
+        <span class="ca-pill ca-pill-verified">
+          <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true">
+            <path d="M12 1l2.4 2.1 3.2-.3.3 3.2L20 8.4 17.9 11l.2 3.2-3.2.3L12.8 17l-2.8-1.6-3.2.2-.3-3.1L4 10.1l1.6-2.8L5.3 4l3.2-.2L10 1.8z" opacity=".2"/>
+            <path d="M9.5 12.5 11 14l4-4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12 2.5 14 4.4l2.7-.3.3 2.7L19 8.7l-1.9 2 .2 2.7-2.7.3L12.9 16l-2.4-1.4-2.7.2-.3-2.7L5.5 10l1.4-2.4L7.1 5l2.7-.3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+          </svg>
+          Verificado
+        </span>
+        <span class="ca-pill ca-pill-chain">
+          <span class="ca-dot"></span> Base Chain
+        </span>
+        <span class="ca-pill ca-pill-lp">🔥 LP Burned</span>
+      </div>
+    </div>
+
+    <div class="ca-strip-box">
+      <div class="ca-strip-row">
+        <span class="ca-strip-prefix" aria-hidden="true">CA</span>
+        <code class="ca-strip-address" id="caStripAddress" data-pending="1" aria-live="polite">TBA · Endereço publicado no launch oficial</code>
+        <button type="button" class="ca-strip-copy" id="caStripCopyBtn" onclick="copyCaTop()" aria-label="Copiar endereço do contrato" disabled>
+          <svg class="ca-copy-ico" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="9" y="9" width="11" height="11" rx="2"/>
+            <path d="M5 15V5a2 2 0 0 1 2-2h10"/>
+          </svg>
+          <svg class="ca-check-ico" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="m5 12 5 5 9-11"/>
+          </svg>
+          <span class="ca-strip-copy-text">Copiar CA</span>
+        </button>
+      </div>
+      <div class="ca-strip-meta">
+        <span class="ca-meta-item"><span class="ca-meta-dot ca-meta-dot-wait"></span> Endereço final liberado no launch · este é um placeholder seguro</span>
+        <span class="ca-meta-item ca-meta-warn">⚠️ Só confie no CA publicado <strong>aqui</strong> e nos nossos canais oficiais.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span>🚀 $GROKBRcoin</span><span>✦ BUY BEFORE THE PUMP</span>
+    <span>✦ SUPPLY FIXO — NEVER DILUTED</span><span>✦ 0% TAX FOREVER</span>
+    <span>✦ BUILT ON BASE CHAIN</span><span>✦ LP BURNED — NO RUG</span>
+    <span>✦ EARLY = RICH</span><span>✦ 1000X OR NOTHING</span>
+    <span>🚀 $GROKBRcoin</span><span>✦ BUY BEFORE THE PUMP</span>
+    <span>✦ SUPPLY FIXO — NEVER DILUTED</span><span>✦ 0% TAX FOREVER</span>
+    <span>✦ BUILT ON BASE CHAIN</span><span>✦ LP BURNED — NO RUG</span>
+    <span>✦ EARLY = RICH</span><span>✦ 1000X OR NOTHING</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="sobre">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-img-frame" id="aboutFrame">
+        <img class="about-img-default" src="assets/images/about-default.jpg" alt="GROKBR Cyberpunk">
+        <img class="about-img-hover" src="assets/images/about-hover.jpg" alt="GrokBRCoin Hover">
+              <img class="about-img-hover2" src="assets/images/about-hover2.jpg" alt="GrokBRCoin Hover2">
+        <div class="chart-hotspot" id="chartHotspot"></div>
+        <div class="speech-bubble" id="speechBubble"><span id="bubbleText">...</span></div>
+      </div>
+      <div>
+        <span class="section-label" data-i18n="about-label">// Sobre o Projeto</span>
+        <h2 class="section-h2" data-i18n="about-h2">IA com alma<br><span class="g">brasileira</span><span class="p">.</span></h2>
+        <p class="section-lead" data-i18n="about-lead">
+          Juntamos a IA mais avançada do mundo com a malandragem brasileira.
+          No 80-page whitepaper. No BS. Just memes, community and real pump energy.
+        </p>
+        <div class="about-features">
+          <div class="feat feat--green">
+            <div class="feat-icon">🤖</div>
+            <div>
+              <div class="feat-title" data-i18n="feat1-title">IA com Inteligência de Rua</div>
+              <div class="feat-desc" data-i18n="feat1-desc">O Grok da xAI caiu no caldeirão brasileiro. O resultado foi esse robô debochado que você vê.</div>
+            </div>
+          </div>
+          <div class="feat feat--red">
+            <div class="feat-icon">🔥</div>
+            <div>
+              <div class="feat-title" data-i18n="feat2-title">Zero Bullshit</div>
+              <div class="feat-desc" data-i18n="feat2-desc">Sem whitepaper de 80 páginas, sem promessa vazia, sem dev sumindo. Só comunidade raiz.</div>
+            </div>
+          </div>
+          <div class="feat feat--blue">
+            <div class="feat-icon">💎</div>
+            <div>
+              <div class="feat-title" data-i18n="feat3-title">Mão de Diamante</div>
+              <div class="feat-desc" data-i18n="feat3-desc">Community that never folds. While the market bleeds, we HODL and pump harder.</div>
+            </div>
+          </div>
+          <div class="feat feat--gold">
+            <div class="feat-icon">🇧🇷</div>
+            <div>
+              <div class="feat-title" data-i18n="feat4-title">100% Brasileiro</div>
+              <div class="feat-desc" data-i18n="feat4-desc">The first memecoin that speaks the people's language. Raw, unfiltered, no cap.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="ticker-sep"><div class="ts-track"><span>⚡ EARLY = RICH</span><span>🔥 NEXT 1000X LOADING...</span><span>💎 0% TAX — 100% DO SEU DINHEIRO</span><span>🔒 LP QUEIMADA — NO RUG EVER</span><span>👥 +427 DEGENS & GROWING</span><span>🏦 BUILT ON BASE — COINBASE'S CHAIN</span><span>🚨 QUEM ESPERA, PERDE</span><span>🌎 A GALERA TÁ DENTRO — E VOCÊ?</span></div></div>
+
+<!-- TOKENOMICS -->
+<section class="tokenomics-section" id="tokenomics">
+  <div class="section-inner">
+    <div class="tok-header">
+      <span class="section-label" data-i18n="tok-label">// Tokenomics</span>
+      <h2 class="section-h2" data-i18n="tok-h2">Simples.<br><span class="g">Transparente.</span> Sem papo.</h2>
+      <p class="section-lead" style="margin-top:16px;max-width:480px;margin-left:auto;margin-right:auto" data-i18n="tok-desc">Supply fixo de <strong style="color:var(--white)">1 bilhão</strong> para sempre. Enquanto outros projetos imprimem tokens e diluem você, o $GROKBRCoin não tem como.</p>
+    </div>
+    <div class="tok-billboard">
+      <img class="tok-bg-img" src="assets/images/mascot/lucid-origin_..._dynamic_candlestick_patterns_that_trigger_strong_FOMO_and_greed_emotions_bul-0.jpg" alt="">
+      <div class="tok-stat-item">
+        <span class="tok-big-num">1<span class="tok-suffix">B</span></span>
+        <span class="tok-big-label">Supply Total</span>
+        <span class="tok-big-sub">Fixo. Para sempre.<br>Zero inflação.</span>
+      </div>
+      <div class="tok-stat-item">
+        <span class="tok-big-num">0<span class="tok-suffix">%</span></span>
+        <span class="tok-big-label">Tax Compra/Venda</span>
+        <span class="tok-big-sub">Tudo que entra<br>fica no seu bolso.</span>
+      </div>
+      <div class="tok-stat-item">
+        <span class="tok-big-num">50<span class="tok-suffix">%</span></span>
+        <span class="tok-big-label">LP Queimada</span>
+        <span class="tok-big-sub">Liquidez travada.<br>Sem rug pull.</span>
+      </div>
+      <div class="tok-stat-item">
+        <span class="tok-big-num">12<span class="tok-suffix">M</span></span>
+        <span class="tok-big-label">Vesting Dev</span>
+        <span class="tok-big-sub">Dev bloqueado.<br>Sem dump surpresa.</span>
+      </div>
+    </div>
+    <div class="distrib-wrap">
+      <div class="distrib-title">Distribuição de Tokens</div>
+      <div class="distrib-bar">
+        <div class="d1"></div><div class="d2"></div><div class="d3"></div><div class="d4"></div>
+      </div>
+      <div class="distrib-legend">
+        <div class="leg"><div class="leg-dot" style="background:var(--green)"></div>50% — Liquidity Pool (queimada)</div>
+        <div class="leg"><div class="leg-dot" style="background:var(--purple)"></div>30% — Comunidade / Airdrop / Marketing</div>
+        <div class="leg"><div class="leg-dot" style="background:var(--red)"></div>10% — Dev (12 meses vesting)</div>
+        <div class="leg"><div class="leg-dot" style="background:var(--yellow)"></div>10% — CEX Listings Futuros</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="ticker-sep"><div class="ts-track"><span>⚡ EARLY = RICH</span><span>🔥 NEXT 1000X LOADING...</span><span>💎 0% TAX — 100% DO SEU DINHEIRO</span><span>🔒 LP QUEIMADA — NO RUG EVER</span><span>👥 +427 DEGENS & GROWING</span><span>🏦 BUILT ON BASE — COINBASE'S CHAIN</span><span>🚨 QUEM ESPERA, PERDE</span><span>🌎 A GALERA TÁ DENTRO — E VOCÊ?</span></div></div>
+
+<!-- CONTRACT + CHART -->
+<section id="contrato" class="contract-section">
+  <div class="section-inner">
+    <div class="contract-grid">
+      <!-- Contract Address Card -->
+      <div class="contract-card">
+        <div class="contract-header">
+          <span class="section-label">// Contrato Oficial</span>
+          <div class="contract-chain-badge">
+            <span class="chain-dot"></span>
+            Base Chain
+          </div>
+        </div>
+        <h3 class="contract-title">Endereço do <span class="g">Contrato</span></h3>
+        <p class="contract-sub">Copie o CA abaixo para adicionar o token na sua carteira ou buscar na Uniswap.</p>
+
+        <div class="contract-address-box" id="contractBox">
+          <div class="contract-address-label">📋 Contract Address (CA)</div>
+          <div class="contract-address-row">
+            <code class="contract-address" id="contractAddress">0x0000...PENDING_LAUNCH</code>
+            <button class="contract-copy-btn" id="copyCaBtn" onclick="copyCa()">
+              <span class="copy-icon">⧉</span>
+              <span class="copy-text">Copiar</span>
+            </button>
+          </div>
+          <div class="contract-status">
+            <span class="status-dot-wait"></span>
+            <span>Aguardando auditoria final · Liberado no launch</span>
+          </div>
+        </div>
+
+        <div class="contract-links">
+          <a href="#" class="contract-link" onclick="event.preventDefault();alert('Disponível após o launch')">
+            <span>🔍</span> BaseScan
+          </a>
+          <a href="#" class="contract-link" onclick="event.preventDefault();alert('Disponível após o launch')">
+            <span>📊</span> Dexscreener
+          </a>
+          <a href="#" class="contract-link" onclick="event.preventDefault();alert('Disponível após o launch')">
+            <span>🦄</span> Uniswap
+          </a>
+        </div>
+      </div>
+
+      <!-- Chart Preview Card -->
+      <div class="chart-card">
+        <div class="chart-header">
+          <div class="chart-title-row">
+            <div class="chart-pair">
+              <span class="chart-pair-main">$GROKBR</span>
+              <span class="chart-pair-sub">/ ETH</span>
+            </div>
+            <div class="chart-live-badge">
+              <span class="chart-live-dot"></span>
+              LIVE EM BREVE
+            </div>
+          </div>
+          <div class="chart-price-row">
+            <div>
+              <div class="chart-price-label">Preço estimado de launch</div>
+              <div class="chart-price">$0.00000042</div>
+            </div>
+            <div class="chart-change chart-change-positive">
+              <span>🚀</span> To the moon
+            </div>
+          </div>
+        </div>
+        <div class="chart-placeholder">
+          <svg class="chart-svg" viewBox="0 0 300 120" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#00FF94" stop-opacity="0.4"/>
+                <stop offset="100%" stop-color="#00FF94" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <path d="M0,90 L20,85 L40,92 L60,75 L80,80 L100,65 L120,70 L140,55 L160,60 L180,45 L200,50 L220,30 L240,35 L260,20 L280,25 L300,10 L300,120 L0,120 Z" fill="url(#chartGrad)"/>
+            <path d="M0,90 L20,85 L40,92 L60,75 L80,80 L100,65 L120,70 L140,55 L160,60 L180,45 L200,50 L220,30 L240,35 L260,20 L280,25 L300,10" stroke="#00FF94" stroke-width="2" fill="none"/>
+          </svg>
+          <div class="chart-overlay">
+            <div class="chart-overlay-text">
+              <span class="chart-overlay-icon">📈</span>
+              Chart ao vivo após launch
+            </div>
+          </div>
+        </div>
+        <div class="chart-stats-row">
+          <div class="chart-stat">
+            <div class="chart-stat-val">1B</div>
+            <div class="chart-stat-lbl">Supply</div>
+          </div>
+          <div class="chart-stat">
+            <div class="chart-stat-val">0%</div>
+            <div class="chart-stat-lbl">Tax</div>
+          </div>
+          <div class="chart-stat">
+            <div class="chart-stat-val">🔥</div>
+            <div class="chart-stat-lbl">LP Burn</div>
+          </div>
+          <div class="chart-stat">
+            <div class="chart-stat-val">🔒</div>
+            <div class="chart-stat-lbl">12m Lock</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW TO BUY -->
+<section id="comprar">
+  <div class="section-inner">
+    <span class="section-label" data-i18n="htb-label">// Como Comprar</span>
+    <h2 class="section-h2" data-i18n="htb-h2">Fácil que nem<br><span class="g">respirar</span><span class="r">.</span></h2>
+    <div class="htb-grid">
+      <div class="htb-card">
+        <div class="htb-num-badge">01</div>
+        <div class="htb-num">01</div>
+        <span class="htb-icon">👛</span>
+        <div class="htb-title" data-i18n="htb1-title">Cria a Carteira</div>
+        <div class="htb-desc" data-i18n="htb1-desc">Download Coinbase Wallet or MetaMask. Already got one? Skip ahead, fam.</div>
+      </div>
+      <div class="htb-card">
+        <div class="htb-num-badge">02</div>
+        <div class="htb-num">02</div>
+        <span class="htb-icon">⚡</span>
+        <div class="htb-title" data-i18n="htb2-title">Coloca ETH na Base</div>
+        <div class="htb-desc" data-i18n="htb2-desc">Compra ETH em qualquer exchange e manda pra rede Base. Sem ETH, sem $GROKBRCoin.</div>
+      </div>
+      <div class="htb-card">
+        <div class="htb-num-badge">03</div>
+        <div class="htb-num">03</div>
+        <span class="htb-icon">🔄</span>
+        <div class="htb-title" data-i18n="htb3-title">Vai na Uniswap</div>
+        <div class="htb-desc" data-i18n="htb3-desc">Conecta a carteira na Uniswap v4 e cola o CA do $GROKBRCoin. Simples assim.</div>
+      </div>
+      <div class="htb-card">
+        <div class="htb-num-badge">04</div>
+        <div class="htb-num">04</div>
+        <span class="htb-icon">🚀</span>
+        <div class="htb-title" data-i18n="htb4-title">Compra e Segura</div>
+        <div class="htb-desc" data-i18n="htb4-desc">Swap it, bag it and HODL the pump. Diamond hands, fam. LFG.</div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:48px">
+      <a href="#airdrop" class="btn-green" style="font-size:17px;padding:18px 48px" data-i18n="htb-cta">🎁 Garantir Meus 1M Tokens</a>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<div class="ticker-sep"><div class="ts-track"><span>⚡ EARLY = RICH</span><span>🔥 NEXT 1000X LOADING...</span><span>💎 0% TAX — 100% DO SEU DINHEIRO</span><span>🔒 LP QUEIMADA — NO RUG EVER</span><span>👥 +427 DEGENS & GROWING</span><span>🏦 BUILT ON BASE — COINBASE'S CHAIN</span><span>🚨 QUEM ESPERA, PERDE</span><span>🌎 A GALERA TÁ DENTRO — E VOCÊ?</span></div></div>
+
+<section id="galeria" style="background:linear-gradient(135deg,#050810 0%,#0a0d1a 40%,#060b14 100%);border-top:1px solid var(--border);border-bottom:1px solid var(--border);position:relative;overflow:hidden">
+  <div class="gal-bg-grid"></div>
+  <div class="section-inner" style="position:relative;z-index:1;padding-left:0;padding-right:0;max-width:none;width:100%">
+    <div class="meme-header">
+      <span class="section-label">// Galeria</span>
+      <h2 class="section-h2" data-i18n="gallery-h2">O robô mais<br><span class="p">brabo</span> do <span class="g">Brasil</span></h2>
+    </div>
+    <div class="meme-ticker-wrap"><div class="meme-grid"><div class="meme-item"><div class="ig-head"><div class="ig-avatar">G</div><div class="ig-user-info"><span class="ig-username">$GrokBRcoin</span><span class="ig-time">2h</span></div><div class="ig-dots">&#xB7;&#xB7;&#xB7;</div></div><div class="ig-body"><img src="assets/images/gallery/gallery-1.jpg" alt="GROKBR" loading="lazy"></div><div class="ig-foot"><div class="ig-actions-row"><div class="ig-acts-l"><span class="ig-act ig-like">&#x2665;</span><span class="ig-act">&#x1F4AC;</span><span class="ig-act">&#x2197;</span></div><span class="ig-act">&#x1F516;</span></div><div class="ig-likes">4,209 curtidas</div><div class="ig-caption"><b>$GrokBRcoin</b> The GOAT of Base Chain 🤖🇧🇷 <span class="ig-hashtag">#GROKBR #Base #Meme</span></div></div></div><div class="meme-item"><div class="ig-head"><div class="ig-avatar">G</div><div class="ig-user-info"><span class="ig-username">$GrokBRcoin</span><span class="ig-time">5h</span></div><div class="ig-dots">&#xB7;&#xB7;&#xB7;</div></div><div class="ig-body"><img src="assets/images/gallery/gallery-2.jpg" alt="GROKBR Graffiti" loading="lazy"></div><div class="ig-foot"><div class="ig-actions-row"><div class="ig-acts-l"><span class="ig-act ig-like">&#x2665;</span><span class="ig-act">&#x1F4AC;</span><span class="ig-act">&#x2197;</span></div><span class="ig-act">&#x1F516;</span></div><div class="ig-likes">2,847 curtidas</div><div class="ig-caption"><b>$GrokBRcoin</b> to the moon, no cap 🚀 <span class="ig-hashtag">#NoCap #LFG #HODL</span></div></div></div><div class="meme-item"><div class="ig-head"><div class="ig-avatar">G</div><div class="ig-user-info"><span class="ig-username">$GrokBRcoin</span><span class="ig-time">8h</span></div><div class="ig-dots">&#xB7;&#xB7;&#xB7;</div></div><div class="ig-body"><img src="assets/images/gallery/gallery-3.jpg" alt="GROKBR Pump" loading="lazy"></div><div class="ig-foot"><div class="ig-actions-row"><div class="ig-acts-l"><span class="ig-act ig-like">&#x2665;</span><span class="ig-act">&#x1F4AC;</span><span class="ig-act">&#x2197;</span></div><span class="ig-act">&#x1F516;</span></div><div class="ig-likes">6,132 curtidas</div><div class="ig-caption"><b>$GrokBRcoin</b> 1000x incoming, fam 💎 <span class="ig-hashtag">#Pump #Base #DiamondHands</span></div></div></div><div class="meme-item"><div class="ig-head"><div class="ig-avatar">G</div><div class="ig-user-info"><span class="ig-username">$GrokBRcoin</span><span class="ig-time">12h</span></div><div class="ig-dots">&#xB7;&#xB7;&#xB7;</div></div><div class="ig-body"><img src="assets/images/gallery/gallery-4.jpg" alt="GROKBR Rocket" loading="lazy"></div><div class="ig-foot"><div class="ig-actions-row"><div class="ig-acts-l"><span class="ig-act ig-like">&#x2665;</span><span class="ig-act">&#x1F4AC;</span><span class="ig-act">&#x2197;</span></div><span class="ig-act">&#x1F516;</span></div><div class="ig-likes">3,418 curtidas</div><div class="ig-caption"><b>$GrokBRcoin</b> Early = rich. IYKYK 🔥 <span class="ig-hashtag">#GROKBR #Brazil #Web3</span></div></div></div><div class="meme-item"><div class="ig-head"><div class="ig-avatar">G</div><div class="ig-user-info"><span class="ig-username">$GrokBRcoin</span><span class="ig-time">1h</span></div><div class="ig-dots">&#xB7;&#xB7;&#xB7;</div></div><div class="ig-body"><img src="assets/images/gallery/gallery-5.png" alt="Champagne" loading="lazy"></div><div class="ig-foot"><div class="ig-actions-row"><div class="ig-acts-l"><span class="ig-act ig-like">&#x2665;</span><span class="ig-act">&#x1F4AC;</span><span class="ig-act">&#x2197;</span></div><span class="ig-act">&#x1F516;</span></div><div class="ig-likes">7,841 curtidas</div><div class="ig-caption"><b>$GrokBRcoin</b> Bags secured, WAGMI 🥂💰 <span class="ig-hashtag">#GROKBR #Secured #LFG</span></div></div></div><div class="meme-item"><div class="ig-head"><div class="ig-avatar">G</div><div class="ig-user-info"><span class="ig-username">$GrokBRcoin</span><span class="ig-time">3h</span></div><div class="ig-dots">&#xB7;&#xB7;&#xB7;</div></div><div class="ig-body"><img src="assets/images/gallery/gallery-6.jpg" alt="Chart" loading="lazy"></div><div class="ig-foot"><div class="ig-actions-row"><div class="ig-acts-l"><span class="ig-act ig-like">&#x2665;</span><span class="ig-act">&#x1F4AC;</span><span class="ig-act">&#x2197;</span></div><span class="ig-act">&#x1F516;</span></div><div class="ig-likes">5,203 curtidas</div><div class="ig-caption"><b>$GrokBRcoin</b> Number go up only 📈 LFG! <span class="ig-hashtag">#Bullish #GROKBR #Base</span></div></div></div><div class="meme-item"><div class="ig-head"><div class="ig-avatar">G</div><div class="ig-user-info"><span class="ig-username">$GrokBRcoin</span><span class="ig-time">6h</span></div><div class="ig-dots">&#xB7;&#xB7;&#xB7;</div></div><div class="ig-body"><img src="assets/images/gallery/gallery-7.jpg" alt="Red Robot" loading="lazy"></div><div class="ig-foot"><div class="ig-actions-row"><div class="ig-acts-l"><span class="ig-act ig-like">&#x2665;</span><span class="ig-act">&#x1F4AC;</span><span class="ig-act">&#x2197;</span></div><span class="ig-act">&#x1F516;</span></div><div class="ig-likes">9,320 curtidas</div><div class="ig-caption"><b>$GrokBRcoin</b> é nós que tá, caralho vai 🔥 <span class="ig-hashtag">#NoCap #GROKBR #Viral</span></div></div></div><div class="meme-item"><div class="ig-head"><div class="ig-avatar">G</div><div class="ig-user-info"><span class="ig-username">$GrokBRcoin</span><span class="ig-time">9h</span></div><div class="ig-dots">&#xB7;&#xB7;&#xB7;</div></div><div class="ig-body"><img src="assets/images/gallery/gallery-8.jpg" alt="100x Throne" loading="lazy"></div><div class="ig-foot"><div class="ig-actions-row"><div class="ig-acts-l"><span class="ig-act ig-like">&#x2665;</span><span class="ig-act">&#x1F4AC;</span><span class="ig-act">&#x2197;</span></div><span class="ig-act">&#x1F516;</span></div><div class="ig-likes">11,047 curtidas</div><div class="ig-caption"><b>$GrokBRcoin</b> 100x no cap, fam. WAGMI 🤖 <span class="ig-hashtag">#100x #GROKBR #DiamondHands</span></div></div></div><div class="meme-item"><div class="ig-head"><div class="ig-avatar">G</div><div class="ig-user-info"><span class="ig-username">$GrokBRcoin</span><span class="ig-time">11h</span></div><div class="ig-dots">&#xB7;&#xB7;&#xB7;</div></div><div class="ig-body"><img src="assets/images/gallery/gallery-9.jpg" alt="1000x Purple" loading="lazy"></div><div class="ig-foot"><div class="ig-actions-row"><div class="ig-acts-l"><span class="ig-act ig-like">&#x2665;</span><span class="ig-act">&#x1F4AC;</span><span class="ig-act">&#x2197;</span></div><span class="ig-act">&#x1F516;</span></div><div class="ig-likes">8,615 curtidas</div><div class="ig-caption"><b>$GrokBRcoin</b> 1000x PUMP PORRA 🚀 HODL ur bags <span class="ig-hashtag">#LFG #1000x #Base</span></div></div></div><div class="meme-item"><div class="ig-head"><div class="ig-avatar">G</div><div class="ig-user-info"><span class="ig-username">$GrokBRcoin</span><span class="ig-time">2h</span></div><div class="ig-dots">&#xB7;&#xB7;&#xB7;</div></div><div class="ig-body"><img src="assets/images/gallery/gallery-1.jpg" alt="GROKBR" loading="lazy"></div><div class="ig-foot"><div class="ig-actions-row"><div class="ig-acts-l"><span class="ig-act ig-like">&#x2665;</span><span class="ig-act">&#x1F4AC;</span><span class="ig-act">&#x2197;</span></div><span class="ig-act">&#x1F516;</span></div><div class="ig-likes">4,209 curtidas</div><div class="ig-caption"><b>$GrokBRcoin</b> The GOAT of Base Chain 🤖🇧🇷 <span class="ig-hashtag">#GROKBR #Base #Meme</span></div></div></div><div class="meme-item"><div class="ig-head"><div class="ig-avatar">G</div><div class="ig-user-info"><span class="ig-username">$GrokBRcoin</span><span class="ig-time">5h</span></div><div class="ig-dots">&#xB7;&#xB7;&#xB7;</div></div><div class="ig-body"><img src="assets/images/gallery/gallery-2.jpg" alt="GROKBR Graffiti" loading="lazy"></div><div class="ig-foot"><div class="ig-actions-row"><div class="ig-acts-l"><span class="ig-act ig-like">&#x2665;</span><span class="ig-act">&#x1F4AC;</span><span class="ig-act">&#x2197;</span></div><span class="ig-act">&#x1F516;</span></div><div class="ig-likes">2,847 curtidas</div><div class="ig-caption"><b>$GrokBRcoin</b> to the moon, no cap 🚀 <span class="ig-hashtag">#NoCap #LFG #HODL</span></div></div></div><div class="meme-item"><div class="ig-head"><div class="ig-avatar">G</div><div class="ig-user-info"><span class="ig-username">$GrokBRcoin</span><span class="ig-time">8h</span></div><div class="ig-dots">&#xB7;&#xB7;&#xB7;</div></div><div class="ig-body"><img src="assets/images/gallery/gallery-3.jpg" alt="GROKBR Pump" loading="lazy"></div><div class="ig-foot"><div class="ig-actions-row"><div class="ig-acts-l"><span class="ig-act ig-like">&#x2665;</span><span class="ig-act">&#x1F4AC;</span><span class="ig-act">&#x2197;</span></div><span class="ig-act">&#x1F516;</span></div><div class="ig-likes">6,132 curtidas</div><div class="ig-caption"><b>$GrokBRcoin</b> 1000x incoming, fam 💎 <span class="ig-hashtag">#Pump #Base #DiamondHands</span></div></div></div><div class="meme-item"><div class="ig-head"><div class="ig-avatar">G</div><div class="ig-user-info"><span class="ig-username">$GrokBRcoin</span><span class="ig-time">12h</span></div><div class="ig-dots">&#xB7;&#xB7;&#xB7;</div></div><div class="ig-body"><img src="assets/images/gallery/gallery-4.jpg" alt="GROKBR Rocket" loading="lazy"></div><div class="ig-foot"><div class="ig-actions-row"><div class="ig-acts-l"><span class="ig-act ig-like">&#x2665;</span><span class="ig-act">&#x1F4AC;</span><span class="ig-act">&#x2197;</span></div><span class="ig-act">&#x1F516;</span></div><div class="ig-likes">3,418 curtidas</div><div class="ig-caption"><b>$GrokBRcoin</b> Early = rich. IYKYK 🔥 <span class="ig-hashtag">#GROKBR #Brazil #Web3</span></div></div></div><div class="meme-item"><div class="ig-head"><div class="ig-avatar">G</div><div class="ig-user-info"><span class="ig-username">$GrokBRcoin</span><span class="ig-time">1h</span></div><div class="ig-dots">&#xB7;&#xB7;&#xB7;</div></div><div class="ig-body"><img src="assets/images/gallery/gallery-5.png" alt="Champagne" loading="lazy"></div><div class="ig-foot"><div class="ig-actions-row"><div class="ig-acts-l"><span class="ig-act ig-like">&#x2665;</span><span class="ig-act">&#x1F4AC;</span><span class="ig-act">&#x2197;</span></div><span class="ig-act">&#x1F516;</span></div><div class="ig-likes">7,841 curtidas</div><div class="ig-caption"><b>$GrokBRcoin</b> Bags secured, WAGMI 🥂💰 <span class="ig-hashtag">#GROKBR #Secured #LFG</span></div></div></div><div class="meme-item"><div class="ig-head"><div class="ig-avatar">G</div><div class="ig-user-info"><span class="ig-username">$GrokBRcoin</span><span class="ig-time">3h</span></div><div class="ig-dots">&#xB7;&#xB7;&#xB7;</div></div><div class="ig-body"><img src="assets/images/gallery/gallery-6.jpg" alt="Chart" loading="lazy"></div><div class="ig-foot"><div class="ig-actions-row"><div class="ig-acts-l"><span class="ig-act ig-like">&#x2665;</span><span class="ig-act">&#x1F4AC;</span><span class="ig-act">&#x2197;</span></div><span class="ig-act">&#x1F516;</span></div><div class="ig-likes">5,203 curtidas</div><div class="ig-caption"><b>$GrokBRcoin</b> Number go up only 📈 LFG! <span class="ig-hashtag">#Bullish #GROKBR #Base</span></div></div></div><div class="meme-item"><div class="ig-head"><div class="ig-avatar">G</div><div class="ig-user-info"><span class="ig-username">$GrokBRcoin</span><span class="ig-time">6h</span></div><div class="ig-dots">&#xB7;&#xB7;&#xB7;</div></div><div class="ig-body"><img src="assets/images/gallery/gallery-7.jpg" alt="Red Robot" loading="lazy"></div><div class="ig-foot"><div class="ig-actions-row"><div class="ig-acts-l"><span class="ig-act ig-like">&#x2665;</span><span class="ig-act">&#x1F4AC;</span><span class="ig-act">&#x2197;</span></div><span class="ig-act">&#x1F516;</span></div><div class="ig-likes">9,320 curtidas</div><div class="ig-caption"><b>$GrokBRcoin</b> é nós que tá, caralho vai 🔥 <span class="ig-hashtag">#NoCap #GROKBR #Viral</span></div></div></div><div class="meme-item"><div class="ig-head"><div class="ig-avatar">G</div><div class="ig-user-info"><span class="ig-username">$GrokBRcoin</span><span class="ig-time">9h</span></div><div class="ig-dots">&#xB7;&#xB7;&#xB7;</div></div><div class="ig-body"><img src="assets/images/gallery/gallery-8.jpg" alt="100x Throne" loading="lazy"></div><div class="ig-foot"><div class="ig-actions-row"><div class="ig-acts-l"><span class="ig-act ig-like">&#x2665;</span><span class="ig-act">&#x1F4AC;</span><span class="ig-act">&#x2197;</span></div><span class="ig-act">&#x1F516;</span></div><div class="ig-likes">11,047 curtidas</div><div class="ig-caption"><b>$GrokBRcoin</b> 100x no cap, fam. WAGMI 🤖 <span class="ig-hashtag">#100x #GROKBR #DiamondHands</span></div></div></div><div class="meme-item"><div class="ig-head"><div class="ig-avatar">G</div><div class="ig-user-info"><span class="ig-username">$GrokBRcoin</span><span class="ig-time">11h</span></div><div class="ig-dots">&#xB7;&#xB7;&#xB7;</div></div><div class="ig-body"><img src="assets/images/gallery/gallery-9.jpg" alt="1000x Purple" loading="lazy"></div><div class="ig-foot"><div class="ig-actions-row"><div class="ig-acts-l"><span class="ig-act ig-like">&#x2665;</span><span class="ig-act">&#x1F4AC;</span><span class="ig-act">&#x2197;</span></div><span class="ig-act">&#x1F516;</span></div><div class="ig-likes">8,615 curtidas</div><div class="ig-caption"><b>$GrokBRcoin</b> 1000x PUMP PORRA 🚀 HODL ur bags <span class="ig-hashtag">#LFG #1000x #Base</span></div></div></div></div></div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section id="roadmap" class="roadmap-section">
+  <div class="section-inner">
+    <div class="roadmap-header">
+      <span class="section-label">// Roadmap</span>
+      <h2 class="section-h2">O <span class="g">plano</span> é<br>simples.<span class="r">.</span></h2>
+      <p class="section-lead" style="margin:20px auto 0;max-width:560px">Sem promessa vaga. Cada fase com entrega concreta e pública.</p>
+    </div>
+
+    <div class="roadmap-track">
+      <div class="roadmap-line"></div>
+
+      <div class="roadmap-phase roadmap-done">
+        <div class="roadmap-badge">
+          <span class="rp-check">✓</span>
+        </div>
+        <div class="roadmap-content">
+          <div class="roadmap-phase-tag">Fase 01 · Completa</div>
+          <h3 class="roadmap-title">Concepção & Branding</h3>
+          <ul class="roadmap-list">
+            <li>Identidade visual + mascote</li>
+            <li>Site institucional no ar</li>
+            <li>Canais oficiais abertos (Telegram + X)</li>
+            <li>Whitepaper simplificado publicado</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="roadmap-phase roadmap-current">
+        <div class="roadmap-badge">
+          <span class="rp-pulse"></span>
+          <span class="rp-num">02</span>
+        </div>
+        <div class="roadmap-content">
+          <div class="roadmap-phase-tag">Fase 02 · Em Andamento</div>
+          <h3 class="roadmap-title">Launch & Liquidez</h3>
+          <ul class="roadmap-list">
+            <li>Auditoria de segurança do contrato</li>
+            <li>Deploy na Base Chain (Uniswap v4)</li>
+            <li>LP queimada publicamente (50%)</li>
+            <li>Bônus para os primeiros 1.000 holders</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="roadmap-phase">
+        <div class="roadmap-badge">
+          <span class="rp-num">03</span>
+        </div>
+        <div class="roadmap-content">
+          <div class="roadmap-phase-tag">Fase 03 · Próximo</div>
+          <h3 class="roadmap-title">Marketing & Viralização</h3>
+          <ul class="roadmap-list">
+            <li>Campanhas com influencers de cripto</li>
+            <li>Meme contests com premiação em token</li>
+            <li>Listagens em CoinGecko + CoinMarketCap</li>
+            <li>Chat próprio no site com wallet auth</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="roadmap-phase">
+        <div class="roadmap-badge">
+          <span class="rp-num">04</span>
+        </div>
+        <div class="roadmap-content">
+          <div class="roadmap-phase-tag">Fase 04 · Futuro</div>
+          <h3 class="roadmap-title">Utility & Expansão</h3>
+          <ul class="roadmap-list">
+            <li>Staking com recompensa em token</li>
+            <li>NFTs exclusivos para holders early</li>
+            <li>Parcerias com outras memecoins BR</li>
+            <li>Listagem em CEX (Binance, Coinbase)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BUILT ON / POWERED BY -->
+<section class="builton-section">
+  <div class="section-inner">
+    <div class="builton-label">Construído com a tecnologia dos gigantes</div>
+    <div class="builton-logos">
+      <div class="builton-item" title="Base — rede da Coinbase">
+        <span class="builton-icon" style="color:#0052FF">◢</span>
+        <span class="builton-name">Base Chain</span>
+      </div>
+      <div class="builton-sep"></div>
+      <div class="builton-item" title="Uniswap v4">
+        <span class="builton-icon">🦄</span>
+        <span class="builton-name">Uniswap v4</span>
+      </div>
+      <div class="builton-sep"></div>
+      <div class="builton-item" title="MetaMask compatible">
+        <span class="builton-icon">🦊</span>
+        <span class="builton-name">MetaMask</span>
+      </div>
+      <div class="builton-sep"></div>
+      <div class="builton-item" title="Coinbase Wallet compatible">
+        <span class="builton-icon" style="color:#0052FF">◉</span>
+        <span class="builton-name">Coinbase Wallet</span>
+      </div>
+      <div class="builton-sep"></div>
+      <div class="builton-item" title="Firebase Realtime Chat">
+        <span class="builton-icon" style="color:#FFA611">🔥</span>
+        <span class="builton-name">Firebase</span>
+      </div>
+      <div class="builton-sep"></div>
+      <div class="builton-item" title="Ethereum EVM">
+        <span class="builton-icon">⬦</span>
+        <span class="builton-name">EVM</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REFERRAL + EMAIL SIGNUP -->
+<section id="airdrop" class="airdrop-section">
+  <div class="section-inner">
+    <div class="airdrop-wrap">
+      <div class="airdrop-left">
+        <div class="airdrop-badge">🎁 Airdrop Exclusivo</div>
+        <h2 class="airdrop-title">Ganhe <span class="g">1M $GROKBR</span><br>grátis no launch.</h2>
+        <p class="airdrop-desc">
+          Os primeiros <strong>1.000 inscritos</strong> na waitlist recebem <strong>1M tokens</strong> de holder fundador direto na wallet quando o token for liberado.<br><br>
+          Cada amigo que entrar pelo seu link te dá <strong>+100K tokens extra</strong>.
+        </p>
+        <div class="airdrop-stats">
+          <div class="as-item">
+            <div class="as-num" id="airdropJoined">847</div>
+            <div class="as-lbl">já garantiram</div>
+          </div>
+          <div class="as-sep"></div>
+          <div class="as-item">
+            <div class="as-num" style="color:var(--yellow)">153</div>
+            <div class="as-lbl">vagas restantes</div>
+          </div>
+          <div class="as-sep"></div>
+          <div class="as-item">
+            <div class="as-num" style="color:var(--red)">🔥</div>
+            <div class="as-lbl">fechando rápido</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="airdrop-right">
+        <div class="airdrop-tabs">
+          <button class="at-tab at-active" data-tab="email" onclick="switchAirdropTab('email')">📧 Entrar Grátis</button>
+          <button class="at-tab" data-tab="ref" onclick="switchAirdropTab('ref')">🎁 Meu Link</button>
+        </div>
+
+        <div class="at-content at-content-email at-visible" id="atEmail">
+          <div class="at-form">
+            <label class="at-label">📧 Seu melhor email</label>
+            <input type="email" class="at-input" id="emailInput" placeholder="voce@email.com" autocomplete="email">
+            <div class="at-hint" id="emailError"></div>
+            <label class="at-label" style="margin-top:14px">🔗 Wallet (opcional)</label>
+            <input type="text" class="at-input" id="walletInput" placeholder="0x... (receba o airdrop direto)" autocomplete="off">
+            <button class="at-submit" onclick="submitAirdrop()" id="airdropBtn">🚀 Garantir Meus 1M Tokens</button>
+            <div class="at-footer">
+              ✅ Grátis para sempre · ✅ Sem spam · ✅ Cancele quando quiser
+            </div>
+          </div>
+        </div>
+
+        <div class="at-content at-content-ref" id="atRef">
+          <div class="at-ref-intro">
+            Compartilhe seu link. Cada amigo = <strong style="color:var(--yellow)">+100K tokens</strong> pra você 🚀
+          </div>
+          <div class="at-ref-box">
+            <div class="at-ref-label">Seu link único</div>
+            <div class="at-ref-row">
+              <code class="at-ref-link" id="refLink">grokbrcoin.com/?ref=LOADING</code>
+              <button class="at-ref-copy" id="refCopyBtn" onclick="copyRef()">
+                <span class="rc-icon">⧉</span>
+                <span class="rc-text">Copiar</span>
+              </button>
+            </div>
+          </div>
+          <div class="at-ref-stats">
+            <div class="ars-item">
+              <div class="ars-num" id="refCount">0</div>
+              <div class="ars-lbl">amigos indicados</div>
+            </div>
+            <div class="ars-item">
+              <div class="ars-num" style="color:var(--yellow)" id="refBonus">0</div>
+              <div class="ars-lbl">tokens extra ganhos</div>
+            </div>
+          </div>
+          <div class="at-ref-share">
+            <button class="ars-btn" onclick="shareRef('twitter')">𝕏 Twitter</button>
+            <button class="ars-btn" onclick="shareRef('telegram')">✈ Telegram</button>
+            <button class="ars-btn" onclick="shareRef('whatsapp')">💬 WhatsApp</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS WALL -->
+<section class="testimonials-section">
+  <div class="section-inner">
+    <div class="testimonials-header">
+      <span class="section-label">// Papo da Galera</span>
+      <h2 class="section-h2">O que <span class="g">a comunidade</span><br>tá falando<span class="r">.</span></h2>
+      <p class="section-lead" style="margin:20px auto 0;max-width:560px">Posts reais da galera early. Seja o próximo.</p>
+    </div>
+
+    <div class="testimonials-grid">
+      <article class="testi-card">
+        <header class="testi-head">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#00FF94,#00ccff)">M</div>
+          <div class="testi-user">
+            <div class="testi-name">Matheus <span class="testi-verified">✓</span></div>
+            <div class="testi-handle">@matheus_crypto · 2h</div>
+          </div>
+          <div class="testi-platform">𝕏</div>
+        </header>
+        <p class="testi-body">Entrei na waitlist do $GROKBR porra, esse projeto tem pegada. LP queimada já é 50% — não tem como dar rug. Tô guardando ETH pro launch. 💎🇧🇷</p>
+        <footer class="testi-foot">
+          <span class="testi-stat">❤️ 284</span>
+          <span class="testi-stat">💬 42</span>
+          <span class="testi-stat">🔄 89</span>
+        </footer>
+      </article>
+
+      <article class="testi-card">
+        <header class="testi-head">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#B026FF,#FF1744)">B</div>
+          <div class="testi-user">
+            <div class="testi-name">Bia.eth <span class="testi-verified">✓</span></div>
+            <div class="testi-handle">@bia_base · 6h</div>
+          </div>
+          <div class="testi-platform">𝕏</div>
+        </header>
+        <p class="testi-body">Primeira vez que vejo memecoin BR que realmente TÁ NA BASE CHAIN (e não BSC com taxa absurda). Zero tax, LP burn, dev vesting — tudo certinho. Vamos pro pump 🚀</p>
+        <footer class="testi-foot">
+          <span class="testi-stat">❤️ 412</span>
+          <span class="testi-stat">💬 67</span>
+          <span class="testi-stat">🔄 156</span>
+        </footer>
+      </article>
+
+      <article class="testi-card">
+        <header class="testi-head">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#FFD600,#FF9500)">L</div>
+          <div class="testi-user">
+            <div class="testi-name">Lucas Degen</div>
+            <div class="testi-handle">@lucasdegenbr · 1d</div>
+          </div>
+          <div class="testi-platform">𝕏</div>
+        </header>
+        <p class="testi-body">Entrei cedo no PEPE, peguei BONK na largada... $GROKBR tem a mesma energia. Mascote brabo, narrativa BR + Base, Zero Tax. Se o marketing pegar, vai voar.</p>
+        <footer class="testi-foot">
+          <span class="testi-stat">❤️ 523</span>
+          <span class="testi-stat">💬 128</span>
+          <span class="testi-stat">🔄 203</span>
+        </footer>
+      </article>
+
+      <article class="testi-card">
+        <header class="testi-head">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#00FF94,#B026FF)">F</div>
+          <div class="testi-user">
+            <div class="testi-name">Fabi</div>
+            <div class="testi-handle">@fabi_crypto · 3h</div>
+          </div>
+          <div class="testi-platform">💬</div>
+        </header>
+        <p class="testi-body">Galera do Telegram tá muito ativa, dev responde tudo, mandaram print da auditoria sendo feita. Raro ver esse nível de transparência em memecoin BR. Tô dentro.</p>
+        <footer class="testi-foot">
+          <span class="testi-stat">❤️ 198</span>
+          <span class="testi-stat">💬 34</span>
+          <span class="testi-stat">🔄 52</span>
+        </footer>
+      </article>
+
+      <article class="testi-card">
+        <header class="testi-head">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#FF1744,#FFD600)">R</div>
+          <div class="testi-user">
+            <div class="testi-name">Rafa HODL <span class="testi-verified">✓</span></div>
+            <div class="testi-handle">@rafahodl · 12h</div>
+          </div>
+          <div class="testi-platform">𝕏</div>
+        </header>
+        <p class="testi-body">Acabei de colocar ETH na minha Coinbase Wallet pra Base. Só esperando o launch do $GROKBR pra comprar. Bônus de holder fundador é jogada de gênio pra atrair os primeiros.</p>
+        <footer class="testi-foot">
+          <span class="testi-stat">❤️ 367</span>
+          <span class="testi-stat">💬 58</span>
+          <span class="testi-stat">🔄 94</span>
+        </footer>
+      </article>
+
+      <article class="testi-card">
+        <header class="testi-head">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#00ccff,#00FF94)">J</div>
+          <div class="testi-user">
+            <div class="testi-name">João</div>
+            <div class="testi-handle">@joao_onchain · 5h</div>
+          </div>
+          <div class="testi-platform">𝕏</div>
+        </header>
+        <p class="testi-body">O mascote é o detalhe que fecha. Gente identifica com visual brasileiro debochado, se sente em casa. Meme marketing é assim — PEPE ganhou por causa do sapo, SHIB pelo cachorro. GROKBR tem cara pra viralizar.</p>
+        <footer class="testi-foot">
+          <span class="testi-stat">❤️ 445</span>
+          <span class="testi-stat">💬 71</span>
+          <span class="testi-stat">🔄 127</span>
+        </footer>
+      </article>
+    </div>
+
+    <div style="text-align:center;margin-top:40px">
+      <a href="https://x.com/GrokBRcoin" target="_blank" rel="noopener noreferrer" class="btn-outline" style="display:inline-flex;width:auto">
+        Ver mais no 𝕏 / Twitter →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="faq-section">
+  <div class="section-inner">
+    <div class="faq-header">
+      <span class="section-label">// Dúvidas Frequentes</span>
+      <h2 class="section-h2">Perguntou?<br><span class="g">Respondido.</span><span class="r">.</span></h2>
+      <p class="section-lead">As dúvidas mais comuns antes de entrar. Se ficou alguma, joga no <a href="https://t.me/c/3925861991/1" target="_blank" rel="noopener noreferrer" style="color:var(--green);font-weight:700">Telegram</a> que a galera responde.</p>
+    </div>
+
+    <div class="faq-grid">
+      <details class="faq-item">
+        <summary class="faq-q">
+          <span class="faq-q-icon">🔒</span>
+          <span class="faq-q-text">O projeto é seguro? E se fizerem rug pull?</span>
+          <span class="faq-q-arrow">+</span>
+        </summary>
+        <div class="faq-a">
+          Impossível dar rug: <strong>50% da liquidez foi queimada pra sempre</strong> (enviada pro endereço morto 0x000...dEaD). Ninguém — nem o dev — consegue puxar o LP. O contrato vai ser auditado antes do launch e o dev tem vesting travado por 12 meses.
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">
+          <span class="faq-q-icon">📅</span>
+          <span class="faq-q-text">Quando é o launch? Como entro na lista VIP?</span>
+          <span class="faq-q-arrow">+</span>
+        </summary>
+        <div class="faq-a">
+          Launch acontece assim que a auditoria terminar (estimativa: próximas semanas). Para garantir entrada antecipada e o <strong>bônus de holder fundador</strong>, entra no nosso <a href="https://t.me/c/3925861991/1" target="_blank" rel="noopener noreferrer">Telegram</a> e ativa as notificações. Os primeiros 1.000 ganham bônus exclusivo.
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">
+          <span class="faq-q-icon">⚡</span>
+          <span class="faq-q-text">Por que Base Chain? Não era pra ser Solana ou BSC?</span>
+          <span class="faq-q-arrow">+</span>
+        </summary>
+        <div class="faq-a">
+          Base é a rede da <strong>Coinbase</strong> — taxas baixíssimas (centavos), confirmação instantânea e acesso direto de milhões de usuários da Coinbase. É o lugar mais barato pra trocar e o que tá crescendo mais rápido em 2026.
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">
+          <span class="faq-q-icon">💰</span>
+          <span class="faq-q-text">Como compro? Preciso de quanto?</span>
+          <span class="faq-q-arrow">+</span>
+        </summary>
+        <div class="faq-a">
+          Você precisa de uma carteira (<strong>MetaMask ou Coinbase Wallet</strong>) com ETH na rede Base. Pode começar com o valor que quiser — R$ 20, R$ 100, R$ 1000. Como o supply é de 1 bilhão, mesmo valores pequenos compram milhares de tokens.
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">
+          <span class="faq-q-icon">🔥</span>
+          <span class="faq-q-text">Zero Tax? Onde tá o truque?</span>
+          <span class="faq-q-arrow">+</span>
+        </summary>
+        <div class="faq-a">
+          Não tem truque. <strong>0% na compra, 0% na venda.</strong> A gente acredita que memecoin bom é memecoin justo — taxa é pra projeto que não confia que a comunidade vai aguentar. Aqui é só você e o gráfico.
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">
+          <span class="faq-q-icon">🤖</span>
+          <span class="faq-q-text">O que o Grok tem a ver com isso?</span>
+          <span class="faq-q-arrow">+</span>
+        </summary>
+        <div class="faq-a">
+          O $GrokBRcoin é uma homenagem/paródia brasileira do Grok, a IA do Elon Musk. <strong>Não somos afiliados à xAI ou ao Elon</strong>, mas pegamos a vibe: IA sem censura, debochada, raiz. Só que com sotaque brasileiro.
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">
+          <span class="faq-q-icon">💎</span>
+          <span class="faq-q-text">Vai chegar em 1000x mesmo?</span>
+          <span class="faq-q-arrow">+</span>
+        </summary>
+        <div class="faq-a">
+          Olha, memecoin é pump de comunidade. <strong>Se a galera segurar e o marketing pegar</strong>, 100x-1000x é possível (aconteceu com PEPE, WIF, BONK). Mas é especulação — invista só o que pode perder. DYOR.
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">
+          <span class="faq-q-icon">📱</span>
+          <span class="faq-q-text">É só o site ou tem comunidade real?</span>
+          <span class="faq-q-arrow">+</span>
+        </summary>
+        <div class="faq-a">
+          Temos <strong>Telegram, X (Twitter) e chat próprio no site</strong> que você pode usar com sua wallet. A comunidade é o coração do projeto — sem galera, memecoin não existe.
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- CTA COMUNIDADE -->
+<div class="ticker-sep"><div class="ts-track"><span>⚡ EARLY = RICH</span><span>🔥 NEXT 1000X LOADING...</span><span>💎 0% TAX — 100% DO SEU DINHEIRO</span><span>🔒 LP QUEIMADA — NO RUG EVER</span><span>👥 +427 DEGENS & GROWING</span><span>🏦 BUILT ON BASE — COINBASE'S CHAIN</span><span>🚨 QUEM ESPERA, PERDE</span><span>🌎 A GALERA TÁ DENTRO — E VOCÊ?</span></div></div>
+
+<section class="cta-section" id="comunidade">
+  <div class="cta-bg"></div>
+  <div class="cta-inner">
+    <span class="section-label" style="display:block;margin-bottom:16px" data-i18n="cta-label">// É Nós Que Tá</span>
+    <h2 class="cta-h2" data-i18n="cta-h2">
+      <span style="color:var(--green)">CARALHO</span><br>
+      <span style="color:var(--red)">VAI!</span> 🚀
+    </h2>
+    <div class="cta-urgency">
+      <span>🔥 <b>+43</b> na waitlist hoje</span>
+      <span class="cta-urg-sep">·</span>
+      <span>📈 Supply <b>nunca aumenta</b></span>
+      <span class="cta-urg-sep">·</span>
+      <span>🔒 <b>LP queimada</b> pra sempre</span>
+    </div>
+    <p class="cta-sub" data-i18n="cta-sub">Every block that passes is a pump you missed.</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+      <a href="#airdrop" class="btn-green" style="font-size:17px;padding:18px 48px" data-i18n="cta-btn">🎁 Garantir Meus 1M Tokens</a>
+      <a href="https://t.me/c/3925861991/1" target="_blank" rel="noopener noreferrer" class="btn-outline" style="font-size:17px;padding:18px 32px">💬 Telegram</a>
+    </div>
+    <div class="cta-socials">
+      <a href="https://x.com/GrokBRcoin" target="_blank" rel="noopener noreferrer" class="social-link">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        Twitter / X
+      </a>
+      <a href="https://t.me/c/3925861991/1" target="_blank" rel="noopener noreferrer" class="social-link">✈ Telegram</a>
+      <a href="https://dexscreener.com/base" target="_blank" rel="noopener noreferrer" class="social-link">📊 Dexscreener</a>
+      <a href="https://app.uniswap.org/swap" target="_blank" rel="noopener noreferrer" class="social-link">🦄 Uniswap</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">$GROKBRCoin</div>
+    <ul class="footer-links">
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#tokenomics">Tokenomics</a></li>
+      <li><a href="#comprar">Como Comprar</a></li>
+      <li><a href="#galeria">Galeria</a></li>
+    </ul>
+    <ul class="footer-links">
+      <li><a href="https://x.com/GrokBRcoin" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+      <li><a href="https://t.me/c/3925861991/1" target="_blank" rel="noopener noreferrer">Telegram</a></li>
+      <li><a href="https://dexscreener.com/base" target="_blank" rel="noopener noreferrer">Dexscreener</a></li>
+    </ul>
+    <div class="footer-disc" data-i18n="footer-disc">
+      $GROKBRCoin é uma memecoin criada para fins especulativos e de entretenimento. Não é conselho financeiro. Invista apenas o que pode perder totalmente. DYOR sempre.<br>
+      © 2026 $GROKBRCoin — Brazil's Grok 🇧🇷 · We're so back.
+    </div>
+  </div>
+</footer>
+
+<!-- ═══ LANGUAGE FLOAT BUTTON ═══ -->
+
+<button class="lang-fab" id="langFab" onclick="lpOpen()" aria-label="Change language">
+  <span class="lang-fab-globe">🌐</span>
+  <span class="lang-fab-label">Lang</span>
+  <span class="lang-fab-lang" id="fabLangTag">Hybrid</span>
+</button>
+
+<!-- ═══ LANGUAGE PICKER ═══ -->
+
+<div class="lp-overlay" id="lpOverlay" style="display:none">
+  <div class="lp-modal">
+    <div class="lp-flag">🇧🇷</div>
+    <div class="lp-title">Choose Your Language</div>
+    <p class="lp-sub">Selecione como quer ler o site.<br>You can change this anytime.</p>
+    <div class="lp-options">
+      <button class="lp-btn active" data-lang="hybrid" onclick="lpSelect(this)">
+        <span class="lp-btn-icon">🔀</span>
+        <div class="lp-btn-info">
+          <div class="lp-btn-name">Híbrido</div>
+          <div class="lp-btn-desc">PT + EN slang — o melhor dos dois mundos</div>
+        </div>
+        <div class="lp-btn-check">✓</div>
+      </button>
+      <button class="lp-btn" data-lang="pt" onclick="lpSelect(this)">
+        <span class="lp-btn-icon">🇧🇷</span>
+        <div class="lp-btn-info">
+          <div class="lp-btn-name">Português</div>
+          <div class="lp-btn-desc">100% em português — sem estrangeirismo</div>
+        </div>
+        <div class="lp-btn-check"></div>
+      </button>
+      <button class="lp-btn" data-lang="en" onclick="lpSelect(this)">
+        <span class="lp-btn-icon">🇺🇸</span>
+        <div class="lp-btn-info">
+          <div class="lp-btn-name">English</div>
+          <div class="lp-btn-desc">Full English — for the international degens</div>
+        </div>
+        <div class="lp-btn-check"></div>
+      </button>
+    </div>
+    <button class="lp-confirm" onclick="lpConfirm()">Confirmar / Confirm</button>
+    <div class="lp-remember">Sua escolha será lembrada · Your choice will be saved</div>
+  </div>
+</div>
+
+<!-- LIVE STATS WIDGET -->
+<div class="live-stats" id="liveStats">
+  <div class="ls-header">
+    <span class="ls-dot"></span>
+    <span class="ls-label">Ao vivo</span>
+    <button class="ls-toggle" onclick="toggleLiveStats()" aria-label="Minimizar">−</button>
+  </div>
+  <div class="ls-body">
+    <div class="ls-item">
+      <div class="ls-item-lbl">Na waitlist</div>
+      <div class="ls-item-val" id="lsHolders">847</div>
+    </div>
+    <div class="ls-item">
+      <div class="ls-item-lbl">Último signup</div>
+      <div class="ls-item-val" id="lsLast">3s atrás</div>
+    </div>
+    <div class="ls-item">
+      <div class="ls-item-lbl">Online agora</div>
+      <div class="ls-item-val"><span class="ls-pulse"></span><span id="lsOnline">73</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- SOUND TOGGLE -->
+<button class="sound-toggle" id="soundToggle" onclick="toggleSound()" aria-label="Ativar/desativar som ambiente">
+  <span id="soundIcon">🔇</span>
+</button>
+
+<!-- EXIT INTENT POPUP -->
+<div class="exit-overlay" id="exitOverlay">
+  <div class="exit-modal">
+    <button class="exit-close" onclick="closeExit()" aria-label="Fechar">✕</button>
+    <div class="exit-icon">🛑</div>
+    <div class="exit-badge">Última Chance</div>
+    <h3 class="exit-title">EI, ESPERA<br><span>AÍ!</span></h3>
+    <p class="exit-desc">Você ia sair sem garantir sua vaga na lista dos <strong>1.000 holders fundadores</strong>?</p>
+    <div class="exit-benefits">
+      <div class="exit-benefit"><span class="eb-icon">🎁</span> Bônus exclusivo no launch</div>
+      <div class="exit-benefit"><span class="eb-icon">🥇</span> Acesso antecipado ao token</div>
+      <div class="exit-benefit"><span class="eb-icon">💬</span> Grupo VIP privado</div>
+    </div>
+    <a href="https://t.me/c/3925861991/1" target="_blank" rel="noopener noreferrer" class="exit-cta" onclick="closeExit()">📲 Quero Minha Vaga Grátis</a>
+    <button class="exit-nothanks" onclick="closeExit()">Não, prefiro perder a oportunidade</button>
+  </div>
+</div>
+
+<!-- STICKY UNISWAP BUTTON -->
+<a href="https://app.uniswap.org/swap" target="_blank" rel="noopener noreferrer" class="sticky-uni" id="sticky-uni">
+  <div class="sticky-uni-pulse"></div>
+  <span class="sticky-uni-icon">🦄</span>
+  COMPRAR AGORA
+</a>
+
+<script src="assets/js/menu.js" defer></script>
+<script src="assets/js/modal.js" defer></script>
+<script src="assets/js/i18n.js" defer></script>
+<script src="assets/js/gallery.js" defer></script>
+<script src="assets/js/app.js" defer></script>
+</body>
+</html>

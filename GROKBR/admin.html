@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — $GrokBRcoin</title>
+<meta name="robots" content="noindex,nofollow">
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#050508;--green:#00FF94;--purple:#B026FF;
+  --red:#FF1744;--yellow:#FFD600;--card:#080a12;
+  --border:rgba(0,255,148,0.1);
+}
+body{
+  background:#050508;color:#fff;
+  font-family:'Space Grotesk',sans-serif;min-height:100vh;
+}
+
+/* LOGIN */
+.login-wrap{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  padding:20px;
+}
+.login-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:20px;padding:40px 36px;
+  max-width:400px;width:100%;text-align:center;
+  box-shadow:0 40px 120px rgba(0,0,0,0.6);
+  position:relative;overflow:hidden;
+}
+.login-card::before{
+  content:'';position:absolute;top:-1px;left:20%;right:20%;height:1px;
+  background:linear-gradient(90deg,transparent,var(--green),transparent);
+}
+.login-icon{font-size:48px;margin-bottom:12px}
+.login-title{
+  font-family:'Bangers',cursive;font-size:28px;letter-spacing:2px;
+  color:#fff;margin-bottom:8px;text-transform:uppercase;
+}
+.login-title span{color:var(--green)}
+.login-sub{font-size:13px;color:rgba(255,255,255,0.5);margin-bottom:28px}
+.login-input{
+  width:100%;background:rgba(0,0,0,0.4);
+  border:1px solid rgba(255,255,255,0.1);color:#fff;
+  padding:14px 16px;border-radius:10px;outline:none;
+  font-family:'Space Grotesk',sans-serif;font-size:15px;
+  margin-bottom:16px;letter-spacing:2px;
+}
+.login-input:focus{border-color:rgba(0,255,148,0.4)}
+.login-btn{
+  width:100%;background:var(--green);color:#000;
+  padding:14px;border:none;border-radius:10px;
+  font-family:'Bangers',cursive;font-size:18px;letter-spacing:2px;
+  cursor:pointer;box-shadow:0 6px 24px rgba(0,255,148,0.3);
+  transition:transform .15s;
+}
+.login-btn:hover{transform:translateY(-2px)}
+.login-err{font-size:12px;color:var(--red);margin-top:10px;min-height:14px}
+
+/* DASHBOARD */
+.dash{display:none}
+.dash.visible{display:block}
+
+.dash-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:20px 32px;
+  border-bottom:1px solid var(--border);
+  background:rgba(5,5,10,0.9);backdrop-filter:blur(10px);
+  position:sticky;top:0;z-index:10;
+}
+.dash-logo{
+  font-family:'Bangers',cursive;font-size:22px;letter-spacing:2px;
+  color:#fff;
+}
+.dash-logo span{color:var(--green)}
+.dash-actions{display:flex;gap:10px}
+.dash-btn{
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.1);
+  color:rgba(255,255,255,0.7);
+  padding:8px 14px;border-radius:8px;
+  font-size:12px;font-weight:700;cursor:pointer;
+  transition:all .2s;
+}
+.dash-btn:hover{background:rgba(0,255,148,0.08);border-color:var(--green);color:var(--green)}
+.dash-btn-danger:hover{background:rgba(255,23,68,0.1);border-color:var(--red);color:var(--red)}
+
+.dash-body{padding:32px;max-width:1400px;margin:0 auto}
+
+.kpi-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:16px;
+  margin-bottom:32px;
+}
+.kpi{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:14px;padding:22px;
+}
+.kpi-lbl{
+  font-size:11px;font-weight:700;letter-spacing:1.5px;
+  color:rgba(255,255,255,0.4);text-transform:uppercase;margin-bottom:8px;
+}
+.kpi-val{
+  font-family:'Bangers',cursive;font-size:36px;letter-spacing:1px;
+  color:var(--green);line-height:1;
+}
+.kpi-sub{
+  font-size:12px;color:rgba(255,255,255,0.5);margin-top:6px;
+}
+.kpi-sub .pos{color:var(--green)}
+.kpi-sub .neg{color:var(--red)}
+
+/* TABLE */
+.table-wrap{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:16px;overflow:hidden;
+  margin-bottom:24px;
+}
+.table-head{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 24px;border-bottom:1px solid var(--border);
+  flex-wrap:wrap;gap:12px;
+}
+.table-title{
+  font-family:'Bangers',cursive;font-size:20px;letter-spacing:2px;color:#fff;
+}
+.table-search{
+  background:rgba(0,0,0,0.4);border:1px solid rgba(255,255,255,0.08);
+  color:#fff;padding:8px 12px;border-radius:8px;font-size:13px;
+  outline:none;width:220px;
+}
+.table-search:focus{border-color:rgba(0,255,148,0.3)}
+table{
+  width:100%;border-collapse:collapse;
+}
+thead th{
+  text-align:left;padding:12px 20px;
+  background:rgba(255,255,255,0.02);
+  font-size:11px;font-weight:700;letter-spacing:1.5px;
+  color:rgba(255,255,255,0.4);text-transform:uppercase;
+  border-bottom:1px solid rgba(255,255,255,0.05);
+}
+tbody td{
+  padding:14px 20px;font-size:13px;
+  color:rgba(255,255,255,0.75);
+  border-bottom:1px solid rgba(255,255,255,0.03);
+}
+tbody tr:hover{background:rgba(0,255,148,0.02)}
+.td-email{font-weight:600;color:#fff}
+.td-wallet{font-family:monospace;font-size:12px;color:var(--green)}
+.td-ref{font-family:monospace;font-size:11px;color:var(--yellow)}
+.td-time{font-size:11px;color:rgba(255,255,255,0.4)}
+.empty-state{
+  text-align:center;padding:60px 20px;
+  color:rgba(255,255,255,0.3);font-size:14px;
+}
+.loading-state{
+  text-align:center;padding:60px 20px;
+  color:rgba(255,255,255,0.4);font-size:14px;
+}
+
+/* REFERRAL LEADERBOARD */
+.leaderboard{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:16px;padding:24px;
+}
+.lb-title{
+  font-family:'Bangers',cursive;font-size:20px;letter-spacing:2px;
+  color:#fff;margin-bottom:18px;
+}
+.lb-item{
+  display:flex;align-items:center;gap:14px;
+  padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.04);
+}
+.lb-item:last-child{border:none}
+.lb-rank{
+  font-family:'Bangers',cursive;font-size:20px;letter-spacing:1px;
+  color:rgba(255,255,255,0.3);width:32px;text-align:center;
+}
+.lb-rank.top{color:var(--yellow)}
+.lb-code{flex:1;font-family:monospace;font-size:13px;color:var(--green)}
+.lb-count{
+  font-family:'Bangers',cursive;font-size:18px;color:#fff;letter-spacing:1px;
+}
+.lb-tokens{font-size:11px;color:var(--yellow);margin-left:8px}
+
+@media(max-width:900px){
+  .kpi-grid{grid-template-columns:repeat(2,1fr)}
+  .dash-body{padding:20px 16px}
+  .dash-header{padding:16px}
+  tbody td{padding:10px 14px;font-size:12px}
+  thead th{padding:10px 14px}
+}
+</style>
+</head>
+<body>
+
+<!-- LOGIN SCREEN -->
+<div class="login-wrap" id="loginScreen">
+  <div class="login-card">
+    <div class="login-icon">🔐</div>
+    <div class="login-title">ADMIN <span>PANEL</span></div>
+    <div class="login-sub">Acesso restrito. Digite a senha.</div>
+    <input type="password" class="login-input" id="passInput" placeholder="senha" autocomplete="off">
+    <button class="login-btn" onclick="doLogin()">ENTRAR</button>
+    <div class="login-err" id="loginErr"></div>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div class="dash" id="dashScreen">
+  <div class="dash-header">
+    <div class="dash-logo">$GrokBR <span>// ADMIN</span></div>
+    <div class="dash-actions">
+      <button class="dash-btn" onclick="exportCSV()">📥 Export CSV</button>
+      <button class="dash-btn" onclick="refresh()">🔄 Refresh</button>
+      <button class="dash-btn" onclick="loadMore()">➕ Carregar mais</button>
+      <button class="dash-btn dash-btn-danger" onclick="logout()">Sair</button>
+    </div>
+  </div>
+
+  <div class="dash-body">
+    <!-- KPIs -->
+    <div class="kpi-grid">
+      <div class="kpi">
+        <div class="kpi-lbl">Total inscritos</div>
+        <div class="kpi-val" id="kpiTotal">—</div>
+        <div class="kpi-sub">na waitlist</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-lbl">Hoje</div>
+        <div class="kpi-val" id="kpiToday" style="color:var(--yellow)">—</div>
+        <div class="kpi-sub">novos nas últimas 24h</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-lbl">Com wallet</div>
+        <div class="kpi-val" id="kpiWallet" style="color:var(--purple)">—</div>
+        <div class="kpi-sub">inscritos com wallet válida</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-lbl">Via referral</div>
+        <div class="kpi-val" id="kpiRef" style="color:var(--red)">—</div>
+        <div class="kpi-sub">vieram por indicação</div>
+      </div>
+    </div>
+
+    <!-- TABLE -->
+    <div class="table-wrap">
+      <div class="table-head">
+        <div class="table-title">Últimos inscritos</div>
+        <input type="text" class="table-search" id="searchInput" placeholder="🔍 buscar email ou wallet...">
+      </div>
+      <div id="tableBody">
+        <div class="loading-state">Carregando dados do Firebase...</div>
+      </div>
+    </div>
+
+    <!-- LEADERBOARD -->
+    <div class="leaderboard">
+      <div class="lb-title">🏆 Top referrers</div>
+      <div id="lbBody">
+        <div class="empty-state">Nenhum referral ainda.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, collection, getDocs, query, orderBy, limit, startAfter } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAe4U7a9EhgBl0u4Ku_k7m3QLIcUmFKfcc",
+  authDomain: "projeto-8c65b.firebaseapp.com",
+  projectId: "projeto-8c65b"
+};
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// ⚠️ AVISO: este login é APENAS UI. A proteção real está nas Firestore
+// Security Rules (ver firestore.rules). Troque a senha publicando o hash
+// abaixo em vez de colocar o texto puro no código.
+// Gerar novo hash no DevTools:
+//   const buf = new TextEncoder().encode('sua-nova-senha');
+//   const h = await crypto.subtle.digest('SHA-256', buf);
+//   console.log([...new Uint8Array(h)].map(b=>b.toString(16).padStart(2,'0')).join(''));
+const ADMIN_PASS_SHA256 = 'REPLACE_WITH_SHA256_HASH_OF_YOUR_PASSWORD';
+const PAGE_SIZE = 200;
+
+async function sha256Hex(str){
+  const buf = new TextEncoder().encode(str);
+  const h = await crypto.subtle.digest('SHA-256', buf);
+  return [...new Uint8Array(h)].map(b => b.toString(16).padStart(2,'0')).join('');
+}
+
+let allData = [];
+let lastCursor = null;
+let loadedAll = false;
+
+window.doLogin = async function(){
+  const input = document.getElementById('passInput');
+  const err = document.getElementById('loginErr');
+  const pass = input.value;
+  input.value = '';
+  if(!pass){ return; }
+  const hash = await sha256Hex(pass);
+  if(hash === ADMIN_PASS_SHA256){
+    sessionStorage.setItem('grokbr_admin', '1');
+    showDash();
+  } else {
+    err.textContent = 'Senha incorreta.';
+    setTimeout(() => { err.textContent = ''; }, 2000);
+  }
+};
+
+document.getElementById('passInput').addEventListener('keydown', e => {
+  if(e.key === 'Enter') doLogin();
+});
+
+window.logout = function(){
+  sessionStorage.removeItem('grokbr_admin');
+  location.reload();
+};
+
+window.refresh = function(){
+  loadData();
+};
+
+async function loadData(){
+  document.getElementById('tableBody').innerHTML = '<div class="loading-state">Carregando dados do Firebase...</div>';
+  allData = [];
+  lastCursor = null;
+  loadedAll = false;
+  try {
+    await loadNextPage();
+    renderAll();
+  } catch(e){
+    document.getElementById('tableBody').innerHTML = '<div class="empty-state">❌ Erro ao carregar: ' + escapeHtml(e.message) + '</div>';
+  }
+}
+
+async function loadNextPage(){
+  if(loadedAll) return;
+  const base = collection(db, 'waitlist');
+  const q = lastCursor
+    ? query(base, orderBy('ts', 'desc'), startAfter(lastCursor), limit(PAGE_SIZE))
+    : query(base, orderBy('ts', 'desc'), limit(PAGE_SIZE));
+  const snap = await getDocs(q);
+  snap.forEach(d => allData.push({ id: d.id, ...d.data() }));
+  lastCursor = snap.docs[snap.docs.length - 1] || lastCursor;
+  if(snap.size < PAGE_SIZE) loadedAll = true;
+}
+
+window.loadMore = async function(){
+  try {
+    await loadNextPage();
+    renderAll();
+  } catch(e){ console.error(e); }
+};
+
+function renderAll(){
+  // KPIs
+  const total = allData.length;
+  const now = Date.now();
+  const today = allData.filter(x => (now - (x.ts || 0)) < 86400000).length;
+  const withWallet = allData.filter(x => x.wallet).length;
+  const viaRef = allData.filter(x => x.ref).length;
+  document.getElementById('kpiTotal').textContent = total.toLocaleString('pt-BR');
+  document.getElementById('kpiToday').textContent = today.toLocaleString('pt-BR');
+  document.getElementById('kpiWallet').textContent = withWallet.toLocaleString('pt-BR');
+  document.getElementById('kpiRef').textContent = viaRef.toLocaleString('pt-BR');
+
+  // Table
+  renderTable(allData);
+
+  // Leaderboard
+  const refCounts = {};
+  allData.forEach(x => { if(x.ref) refCounts[x.ref] = (refCounts[x.ref] || 0) + 1; });
+  const sorted = Object.entries(refCounts).sort((a, b) => b[1] - a[1]).slice(0, 10);
+  const lb = document.getElementById('lbBody');
+  if(sorted.length === 0){
+    lb.innerHTML = '<div class="empty-state">Nenhum referral ainda.</div>';
+  } else {
+    lb.innerHTML = sorted.map(([code, count], i) => `
+      <div class="lb-item">
+        <div class="lb-rank ${i < 3 ? 'top' : ''}">${i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : '#' + (i + 1)}</div>
+        <div class="lb-code">${code}</div>
+        <div class="lb-count">${count} <span class="lb-tokens">+${(count * 100000).toLocaleString('pt-BR')} tokens</span></div>
+      </div>
+    `).join('');
+  }
+}
+
+function renderTable(data){
+  const tb = document.getElementById('tableBody');
+  if(data.length === 0){
+    tb.innerHTML = '<div class="empty-state">Nenhum inscrito ainda.</div>';
+    return;
+  }
+  const rows = data.slice(0, 100).map(x => {
+    const date = x.ts ? new Date(x.ts) : null;
+    const timeStr = date ? date.toLocaleString('pt-BR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }) : '—';
+    const walletShort = x.wallet ? x.wallet.slice(0, 6) + '...' + x.wallet.slice(-4) : '—';
+    return `
+      <tr>
+        <td class="td-email">${escapeHtml(x.email || '—')}</td>
+        <td class="td-wallet">${walletShort}</td>
+        <td class="td-ref">${x.ref || '—'}</td>
+        <td class="td-time">${timeStr}</td>
+      </tr>
+    `;
+  }).join('');
+  tb.innerHTML = `
+    <table>
+      <thead>
+        <tr>
+          <th>Email</th><th>Wallet</th><th>Veio por (ref)</th><th>Quando</th>
+        </tr>
+      </thead>
+      <tbody>${rows}</tbody>
+    </table>
+  `;
+}
+
+function escapeHtml(s){
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+document.getElementById('searchInput').addEventListener('input', (e) => {
+  const q = e.target.value.toLowerCase().trim();
+  if(!q){ renderTable(allData); return; }
+  renderTable(allData.filter(x =>
+    (x.email && x.email.toLowerCase().includes(q)) ||
+    (x.wallet && x.wallet.toLowerCase().includes(q))
+  ));
+});
+
+// Prefixa fórmulas (='+-@\t\r) com ' pra bloquear CSV injection no Excel.
+function csvSafe(v){
+  const s = String(v ?? '');
+  return /^[=+\-@\t\r]/.test(s) ? "'" + s : s;
+}
+window.exportCSV = function(){
+  const headers = ['email','wallet','ref','myRef','date'];
+  const rows = [headers.join(',')];
+  allData.forEach(x => {
+    rows.push([
+      x.email, x.wallet, x.ref, x.myRef,
+      x.date || (x.ts ? new Date(x.ts).toISOString() : '')
+    ].map(v => `"${csvSafe(v).replace(/"/g,'""')}"`).join(','));
+  });
+  // BOM pra Excel abrir UTF-8 corretamente
+  const blob = new Blob(['\uFEFF' + rows.join('\r\n')], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'grokbr-waitlist-' + new Date().toISOString().slice(0,10) + '.csv';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+};
+
+function showDash(){
+  document.getElementById('loginScreen').style.display = 'none';
+  document.getElementById('dashScreen').classList.add('visible');
+  loadData();
+}
+
+// Auto-login if session still valid
+if(sessionStorage.getItem('grokbr_admin') === '1'){
+  showDash();
+}
+</script>
+
+</body>
+</html>

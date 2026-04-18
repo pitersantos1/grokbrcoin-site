@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>$GrokBRcoin — Entrar</title>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#050508;
+  --green:#00FF94;
+  --purple:#B026FF;
+  --red:#FF1744;
+  --white:#FFFFFF;
+  --card:#080a12;
+  --border:rgba(0,255,148,0.1);
+}
+body{
+  background:radial-gradient(ellipse 130% 55% at 50% -5%,rgba(0,50,20,.75) 0%,transparent 55%),
+    radial-gradient(ellipse 70% 40% at 15% 45%,rgba(0,255,148,.04) 0%,transparent 50%),
+    #050508;
+  background-attachment:fixed;
+  color:var(--white);
+  font-family:'Space Grotesk',sans-serif;
+  min-height:100vh;
+  display:flex;flex-direction:column;
+}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 60px;height:72px;
+  background:rgba(3,3,8,0.95);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{
+  font-family:'Bangers',cursive;font-size:28px;letter-spacing:3px;
+  text-transform:uppercase;text-decoration:none;line-height:1;
+}
+.nav-logo .s{color:var(--green);text-shadow:0 0 16px rgba(0,255,148,0.6)}
+.nav-logo .g{color:#fff}
+.nav-logo .b{color:var(--purple);text-shadow:0 0 16px rgba(176,38,255,0.6)}
+.nav-link{
+  color:rgba(255,255,255,0.6);text-decoration:none;
+  font-size:13px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;
+  transition:color .2s;
+}
+.nav-link:hover{color:#fff}
+
+/* PAGE */
+.page{
+  flex:1;display:flex;align-items:center;justify-content:center;
+  padding:100px 20px 40px;
+}
+
+/* CARD */
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:48px 40px;
+  width:100%;max-width:460px;
+  box-shadow:0 0 80px rgba(0,255,148,0.04);
+  position:relative;overflow:hidden;
+}
+.card::before{
+  content:'';position:absolute;top:-1px;left:20%;right:20%;height:1px;
+  background:linear-gradient(90deg,transparent,var(--green),transparent);
+}
+
+.card-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(0,255,148,0.08);
+  border:1px solid rgba(0,255,148,0.3);
+  border-radius:100px;padding:5px 14px;
+  font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  color:var(--green);margin-bottom:24px;
+}
+.dot{width:6px;height:6px;background:var(--green);border-radius:50%;animation:blink 1.5s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+.card-title{
+  font-family:'Bangers',cursive;font-size:42px;letter-spacing:3px;
+  text-transform:uppercase;line-height:1;margin-bottom:8px;
+}
+.card-title span{color:var(--green)}
+.card-sub{
+  font-size:14px;color:rgba(255,255,255,0.5);
+  line-height:1.6;margin-bottom:36px;
+}
+
+/* STEPS */
+.step{display:none}
+.step.active{display:block}
+
+/* WALLET BUTTON */
+.btn-metamask{
+  width:100%;display:flex;align-items:center;justify-content:center;gap:12px;
+  background:linear-gradient(135deg,rgba(0,255,148,0.12),rgba(176,38,255,0.08));
+  border:1px solid rgba(0,255,148,0.35);
+  border-radius:14px;padding:18px 24px;
+  font-family:'Bangers',cursive;font-size:22px;letter-spacing:2px;
+  color:var(--green);cursor:pointer;
+  transition:all .2s ease;
+  position:relative;overflow:hidden;
+}
+.btn-metamask:hover{
+  background:linear-gradient(135deg,rgba(0,255,148,0.2),rgba(176,38,255,0.12));
+  border-color:var(--green);
+  box-shadow:0 0 40px rgba(0,255,148,0.2);
+  transform:translateY(-2px);
+}
+.btn-metamask:active{transform:scale(0.98)}
+.btn-metamask img{width:32px;height:32px}
+.btn-metamask .btn-sub{
+  font-family:'Space Grotesk',sans-serif;font-size:11px;
+  color:rgba(255,255,255,0.4);letter-spacing:1px;font-weight:600;
+  display:block;margin-top:2px;text-transform:uppercase;
+}
+
+/* WALLET DISPLAY */
+.wallet-display{
+  background:rgba(0,255,148,0.06);
+  border:1px solid rgba(0,255,148,0.2);
+  border-radius:12px;padding:16px 20px;
+  margin-bottom:24px;
+  display:flex;align-items:center;gap:12px;
+}
+.wallet-icon{
+  width:36px;height:36px;border-radius:50%;
+  background:linear-gradient(135deg,var(--green),var(--purple));
+  flex-shrink:0;
+}
+.wallet-addr{
+  font-size:13px;color:rgba(255,255,255,0.7);
+  font-family:monospace;word-break:break-all;
+}
+.wallet-label{
+  font-size:10px;color:var(--green);font-weight:700;
+  letter-spacing:1.5px;text-transform:uppercase;margin-bottom:3px;
+}
+
+/* INPUT */
+.input-group{margin-bottom:20px}
+.input-label{
+  display:block;font-size:11px;font-weight:700;
+  letter-spacing:1.5px;text-transform:uppercase;
+  color:rgba(255,255,255,0.5);margin-bottom:8px;
+}
+.input-field{
+  width:100%;background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.12);
+  border-radius:10px;padding:14px 16px;
+  font-size:15px;font-weight:500;color:#fff;
+  font-family:'Space Grotesk',sans-serif;
+  outline:none;transition:border-color .2s,box-shadow .2s;
+}
+.input-field::placeholder{color:rgba(255,255,255,0.2)}
+.input-field:focus{
+  border-color:rgba(0,255,148,0.4);
+  box-shadow:0 0 0 3px rgba(0,255,148,0.08);
+}
+.input-hint{font-size:11px;color:rgba(255,255,255,0.3);margin-top:6px}
+.input-error{font-size:12px;color:var(--red);margin-top:6px;display:none}
+
+/* BTN */
+.btn-primary{
+  width:100%;display:flex;align-items:center;justify-content:center;gap:8px;
+  background:var(--green);color:#000;
+  font-family:'Bangers',cursive;font-size:20px;letter-spacing:2px;
+  padding:16px 24px;border-radius:12px;border:none;cursor:pointer;
+  box-shadow:0 6px 40px rgba(0,255,148,0.3);
+  transition:all .15s ease;
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 50px rgba(0,255,148,0.5)}
+.btn-primary:active{transform:scale(0.98)}
+.btn-primary:disabled{opacity:0.5;cursor:not-allowed;transform:none}
+
+/* DIVIDER */
+.divider{
+  display:flex;align-items:center;gap:12px;
+  margin:24px 0;color:rgba(255,255,255,0.2);font-size:12px;
+}
+.divider::before,.divider::after{
+  content:'';flex:1;height:1px;background:rgba(255,255,255,0.08);
+}
+
+/* ALREADY USER */
+.already{
+  text-align:center;font-size:13px;color:rgba(255,255,255,0.4);
+  margin-top:20px;
+}
+.already a{color:var(--green);text-decoration:none;font-weight:600}
+.already a:hover{text-decoration:underline}
+
+/* STATUS */
+.status-msg{
+  display:none;
+  padding:12px 16px;border-radius:10px;
+  font-size:13px;font-weight:600;margin-bottom:16px;
+  text-align:center;
+}
+.status-msg.error{
+  background:rgba(255,23,68,0.1);
+  border:1px solid rgba(255,23,68,0.3);
+  color:var(--red);display:block;
+}
+.status-msg.success{
+  background:rgba(0,255,148,0.08);
+  border:1px solid rgba(0,255,148,0.25);
+  color:var(--green);display:block;
+}
+.status-msg.loading{
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.1);
+  color:rgba(255,255,255,0.6);display:block;
+}
+
+/* NO METAMASK */
+.no-metamask{
+  text-align:center;
+  background:rgba(255,214,0,0.05);
+  border:1px solid rgba(255,214,0,0.2);
+  border-radius:12px;padding:20px;
+  margin-top:16px;
+  display:none;
+}
+.no-metamask p{font-size:13px;color:rgba(255,255,255,0.5);margin-bottom:8px}
+.no-metamask a{color:#FFD600;font-weight:600;font-size:13px}
+
+@media(max-width:600px){
+  nav{padding:0 20px}
+  .card{padding:32px 24px}
+  .card-title{font-size:32px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <span class="s">$</span><span class="g">Grok</span><span class="b">BR</span><span class="g">coin</span>
+  </a>
+  <a href="chat.html" class="nav-link">Chat →</a>
+</nav>
+
+<div class="page">
+  <div class="card">
+    <div class="card-badge"><span class="dot"></span> Registro na Chain</div>
+    <h1 class="card-title">ENTRAR<br><span>NA REDE</span></h1>
+    <p class="card-sub">Conecte sua wallet e escolha um nome. Sem senha, sem e-mail — só sua carteira.</p>
+
+    <div id="status" class="status-msg"></div>
+
+    <!-- STEP 1: Connect MetaMask -->
+    <div id="step1" class="step active">
+      <button class="btn-metamask" onclick="connectMetaMask()">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/36/MetaMask_Fox.svg" alt="MetaMask">
+        <div>
+          CONECTAR METAMASK
+          <span class="btn-sub">Clique para conectar sua wallet</span>
+        </div>
+      </button>
+      <div id="no-metamask" class="no-metamask">
+        <p>MetaMask não detectado no seu navegador.</p>
+        <a href="https://metamask.io/download/" target="_blank" rel="noopener noreferrer">→ Instalar MetaMask</a>
+      </div>
+    </div>
+
+    <!-- STEP 2: Choose username -->
+    <div id="step2" class="step">
+      <div class="wallet-display">
+        <div class="wallet-icon"></div>
+        <div>
+          <div class="wallet-label">Wallet Conectada</div>
+          <div class="wallet-addr" id="wallet-addr-display"></div>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label class="input-label" for="username-input">Escolha seu nome</label>
+        <input
+          type="text"
+          id="username-input"
+          class="input-field"
+          placeholder="ex: CryptoFrog, GrokKing..."
+          maxlength="24"
+          autocomplete="off"
+        >
+        <div class="input-hint">Entre 3 e 24 caracteres. Sem espaços.</div>
+        <div class="input-error" id="username-error"></div>
+      </div>
+
+      <button class="btn-primary" onclick="register()" id="register-btn">
+        REGISTRAR E ENTRAR
+      </button>
+    </div>
+
+    <div class="already">
+      Já tem conta? <a href="#" onclick="loginExisting()">Entrar com a wallet →</a>
+    </div>
+  </div>
+</div>
+
+<!-- Firebase SDK -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, doc, getDoc, setDoc, query, collection, where, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAe4U7a9EhgBl0u4Ku_k7m3QLIcUmFKfcc",
+  authDomain: "projeto-8c65b.firebaseapp.com",
+  projectId: "projeto-8c65b",
+  storageBucket: "projeto-8c65b.firebasestorage.app",
+  messagingSenderId: "804162714664",
+  appId: "1:804162714664:web:724efb10dc3e9e623ec91d"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+let connectedWallet = null;
+
+function showStatus(msg, type) {
+  const el = document.getElementById('status');
+  el.textContent = msg;
+  el.className = 'status-msg ' + type;
+}
+
+function hideStatus() {
+  document.getElementById('status').className = 'status-msg';
+}
+
+window.connectMetaMask = async function() {
+  if (!window.ethereum) {
+    document.getElementById('no-metamask').style.display = 'block';
+    return;
+  }
+  try {
+    showStatus('Aguardando MetaMask...', 'loading');
+    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+    connectedWallet = accounts[0].toLowerCase();
+
+    // Check if already registered
+    const userDoc = await getDoc(doc(db, 'users', connectedWallet));
+    if (userDoc.exists()) {
+      const data = userDoc.data();
+      localStorage.setItem('grokbr_wallet', connectedWallet);
+      localStorage.setItem('grokbr_username', data.username);
+      showStatus('Bem-vindo de volta, ' + data.username + '! Redirecionando...', 'success');
+      setTimeout(() => window.location.href = 'chat.html', 1500);
+      return;
+    }
+
+    hideStatus();
+    document.getElementById('wallet-addr-display').textContent =
+      connectedWallet.slice(0,6) + '...' + connectedWallet.slice(-4);
+    document.getElementById('step1').classList.remove('active');
+    document.getElementById('step2').classList.add('active');
+  } catch(e) {
+    showStatus('Conexão recusada. Tente novamente.', 'error');
+  }
+};
+
+window.loginExisting = async function() {
+  if (!window.ethereum) {
+    document.getElementById('no-metamask').style.display = 'block';
+    return;
+  }
+  try {
+    showStatus('Verificando wallet...', 'loading');
+    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+    const wallet = accounts[0].toLowerCase();
+    const userDoc = await getDoc(doc(db, 'users', wallet));
+    if (userDoc.exists()) {
+      const data = userDoc.data();
+      localStorage.setItem('grokbr_wallet', wallet);
+      localStorage.setItem('grokbr_username', data.username);
+      showStatus('Bem-vindo, ' + data.username + '!', 'success');
+      setTimeout(() => window.location.href = 'chat.html', 1500);
+    } else {
+      hideStatus();
+      connectedWallet = wallet;
+      document.getElementById('wallet-addr-display').textContent =
+        wallet.slice(0,6) + '...' + wallet.slice(-4);
+      document.getElementById('step1').classList.remove('active');
+      document.getElementById('step2').classList.add('active');
+    }
+  } catch(e) {
+    showStatus('Erro ao conectar. Tente novamente.', 'error');
+  }
+};
+
+window.register = async function() {
+  const input = document.getElementById('username-input');
+  const username = input.value.trim();
+  const errEl = document.getElementById('username-error');
+  const btn = document.getElementById('register-btn');
+  errEl.style.display = 'none';
+
+  if (username.length < 3) {
+    errEl.textContent = 'Nome muito curto. Mínimo 3 caracteres.';
+    errEl.style.display = 'block';
+    return;
+  }
+  if (!/^[a-zA-Z0-9_]+$/.test(username)) {
+    errEl.textContent = 'Só letras, números e underscore. Sem espaços.';
+    errEl.style.display = 'block';
+    return;
+  }
+
+  btn.disabled = true;
+  showStatus('Verificando disponibilidade...', 'loading');
+
+  try {
+    // Check if username taken
+    const q = query(collection(db, 'users'), where('username_lower', '==', username.toLowerCase()));
+    const snap = await getDocs(q);
+    if (!snap.empty) {
+      hideStatus();
+      errEl.textContent = 'Este nome já está em uso. Escolha outro.';
+      errEl.style.display = 'block';
+      btn.disabled = false;
+      return;
+    }
+
+    // Save user
+    await setDoc(doc(db, 'users', connectedWallet), {
+      wallet: connectedWallet,
+      username: username,
+      username_lower: username.toLowerCase(),
+      createdAt: new Date().toISOString()
+    });
+
+    localStorage.setItem('grokbr_wallet', connectedWallet);
+    localStorage.setItem('grokbr_username', username);
+
+    showStatus('Registrado com sucesso! Entrando no chat...', 'success');
+    setTimeout(() => window.location.href = 'chat.html', 1500);
+  } catch(e) {
+    showStatus('Erro ao registrar. Tente novamente.', 'error');
+    btn.disabled = false;
+  }
+};
+</script>
+
+</body>
+</html>
